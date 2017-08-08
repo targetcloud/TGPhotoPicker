@@ -257,6 +257,19 @@ func upLoadData(){
 ```
 #### 使用链式编程配置时，请在所有属性前加tg_前缀即可
 
+#### 选择指示器各状态组合参数说明
+
+类型 | 未选择状态 | 选择状态 | 删除状态 | 删除高亮状态 | 数字状态| 其他说明
+------ | ------ | ------ | ------ | ------ | ------ | ------
+只有勾| 勾色white(0.7) 、checkboxLineW | 勾色tincolor、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | shadowW、shadowH、fontSize、checkboxLineW、checkboxPadding、字色tinColor |
+圈勾| 圈色white(0.3)、border色white(0.7)、 勾色white、checkboxLineW、checkboxPadding |  圈色tincolor、 勾色white，checkboxLineW、 渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 checkboxPadding | 叉色同左 | 叉色removeHighlightedColor | 字色white、圈色tinColor、checkboxPadding | 微博未选择状态勾色clear、微博删除状态勾色white
+方勾| 方色white(0.3)、 勾色white、checkboxLineW、checkboxCorner | 方色tincolor、渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 勾色white、checkboxCorner、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、方色tinColor、checkboxCorner | 
+带勾| 带色white(0.3)、 勾色white、渐变（checkboxBeginngAlpha、0.01）、checkboxLineW、checkboxCorner、checkboxPadding | 带色tincolor、 勾色white、    渐变（checkboxBeginngAlpha、0.01）、 checkboxCorner、checkboxPadding、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、方色tinColor（渐变（checkboxBeginngAlpha、0.01））、checkboxCorner | 
+斜带勾| 带色white(0.3)、 勾色white、checkboxLineW | 带色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | tinColor、字色white |
+三角勾| 角色white(0.3)、 勾色white、checkboxLineW | 角色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | tinColor、字色white |
+心| 心色white(0.7)、checkboxLineW、 无勾 | 心色tincolor、 无勾 | 叉色同左、removeType为circle | 叉色removeHighlightedColor | 同circle |
+星 | 星色white(0.3)、border色white(0.7)、isShowBorder、checkboxLineW、无勾 | 星色tincolor、无勾、无border  | 叉色同左、removeType为circle | 叉色removeHighlightedColor | 同circle |
+
 ### 更多使用配置组合效果请download本项目或fork本项目查看
 
 ## diagonalBelt运行效果
