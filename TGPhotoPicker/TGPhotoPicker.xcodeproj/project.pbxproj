@@ -1,0 +1,390 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A0DC2CE1F16262600233541 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2CD1F16262600233541 /* AppDelegate.swift */; };
+		6A0DC2D01F16262600233541 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2CF1F16262600233541 /* ViewController.swift */; };
+		6A0DC2D31F16262600233541 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0DC2D11F16262600233541 /* Main.storyboard */; };
+		6A0DC2D51F16262600233541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A0DC2D41F16262600233541 /* Assets.xcassets */; };
+		6A0DC2D81F16262600233541 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0DC2D61F16262600233541 /* LaunchScreen.storyboard */; };
+		6A0DC2E11F1628F000233541 /* TGPhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2E01F1628F000233541 /* TGPhotoPicker.swift */; };
+		6A0DC2E31F16297C00233541 /* TGPhotoM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2E21F16297C00233541 /* TGPhotoM.swift */; };
+		6A0DC2E51F16E44800233541 /* TGFetchM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2E41F16E44800233541 /* TGFetchM.swift */; };
+		6A0DC2E71F16E7BB00233541 /* TGPhotoPickerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0DC2E61F16E7BB00233541 /* TGPhotoPickerConfig.swift */; };
+		6A3D7E261F2308CC008B7AEE /* TGBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D7E251F2308CC008B7AEE /* TGBottomBar.swift */; };
+		6A3D7E281F2345EF008B7AEE /* TGTopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D7E271F2345EF008B7AEE /* TGTopBar.swift */; };
+		6A3D7E2A1F2352BE008B7AEE /* TGAlbumPhotoPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D7E291F2352BE008B7AEE /* TGAlbumPhotoPreviewVC.swift */; };
+		6A3D7E2C1F237DBC008B7AEE /* TGPhotoCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D7E2B1F237DBC008B7AEE /* TGPhotoCollectionVC.swift */; };
+		6A8B7B6F1F1F7DC7002D520A /* TGPhotoPreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B6E1F1F7DC7002D520A /* TGPhotoPreviewVC.swift */; };
+		6A8B7B711F1F7EC5002D520A /* TGPhotoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B701F1F7EC5002D520A /* TGPhotoPreviewCell.swift */; };
+		6A8B7B731F1F8672002D520A /* TGPhotoPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6A8B7B721F1F8672002D520A /* TGPhotoPicker.bundle */; };
+		6A8B7B751F206B98002D520A /* TGPhotoImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B741F206B98002D520A /* TGPhotoImageManager.swift */; };
+		6A8B7B771F21BD8F002D520A /* TGPhotoPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B761F21BD8F002D520A /* TGPhotoPickerVC.swift */; };
+		6A8B7B791F21E0EC002D520A /* TGPhotoFetchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B781F21E0EC002D520A /* TGPhotoFetchOptions.swift */; };
+		6A8B7B7B1F21F2B3002D520A /* TGPhotoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B7B7A1F21F2B3002D520A /* TGPhotoListVC.swift */; };
+		6ADA33131F26465F00C9A040 /* TGImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADA33121F26465F00C9A040 /* TGImage.swift */; };
+		6ADA33151F2767AF00C9A040 /* TGPhotoPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADA33141F2767AF00C9A040 /* TGPhotoPickerManager.swift */; };
+		6ADA33171F277B2600C9A040 /* TGCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADA33161F277B2600C9A040 /* TGCameraVC.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6A0DC2CA1F16262600233541 /* TGPhotoPicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGPhotoPicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A0DC2CD1F16262600233541 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6A0DC2CF1F16262600233541 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6A0DC2D21F16262600233541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6A0DC2D41F16262600233541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A0DC2D71F16262600233541 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6A0DC2D91F16262600233541 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6A0DC2E01F1628F000233541 /* TGPhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPicker.swift; sourceTree = "<group>"; };
+		6A0DC2E21F16297C00233541 /* TGPhotoM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoM.swift; sourceTree = "<group>"; };
+		6A0DC2E41F16E44800233541 /* TGFetchM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGFetchM.swift; sourceTree = "<group>"; };
+		6A0DC2E61F16E7BB00233541 /* TGPhotoPickerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPickerConfig.swift; sourceTree = "<group>"; };
+		6A3D7E251F2308CC008B7AEE /* TGBottomBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGBottomBar.swift; sourceTree = "<group>"; };
+		6A3D7E271F2345EF008B7AEE /* TGTopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGTopBar.swift; sourceTree = "<group>"; };
+		6A3D7E291F2352BE008B7AEE /* TGAlbumPhotoPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGAlbumPhotoPreviewVC.swift; sourceTree = "<group>"; };
+		6A3D7E2B1F237DBC008B7AEE /* TGPhotoCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoCollectionVC.swift; sourceTree = "<group>"; };
+		6A8B7B6E1F1F7DC7002D520A /* TGPhotoPreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPreviewVC.swift; sourceTree = "<group>"; };
+		6A8B7B701F1F7EC5002D520A /* TGPhotoPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPreviewCell.swift; sourceTree = "<group>"; };
+		6A8B7B721F1F8672002D520A /* TGPhotoPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TGPhotoPicker.bundle; sourceTree = "<group>"; };
+		6A8B7B741F206B98002D520A /* TGPhotoImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoImageManager.swift; sourceTree = "<group>"; };
+		6A8B7B761F21BD8F002D520A /* TGPhotoPickerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPickerVC.swift; sourceTree = "<group>"; };
+		6A8B7B781F21E0EC002D520A /* TGPhotoFetchOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoFetchOptions.swift; sourceTree = "<group>"; };
+		6A8B7B7A1F21F2B3002D520A /* TGPhotoListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoListVC.swift; sourceTree = "<group>"; };
+		6ADA33121F26465F00C9A040 /* TGImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGImage.swift; sourceTree = "<group>"; };
+		6ADA33141F2767AF00C9A040 /* TGPhotoPickerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGPhotoPickerManager.swift; sourceTree = "<group>"; };
+		6ADA33161F277B2600C9A040 /* TGCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGCameraVC.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6A0DC2C71F16262600233541 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6A0DC2C11F16262600233541 = {
+			isa = PBXGroup;
+			children = (
+				6A0DC2CC1F16262600233541 /* TGPhotoPicker */,
+				6A0DC2CB1F16262600233541 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6A0DC2CB1F16262600233541 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6A0DC2CA1F16262600233541 /* TGPhotoPicker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6A0DC2CC1F16262600233541 /* TGPhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				6A0DC2DF1F16264000233541 /* TGPhotoPicker */,
+				6A0DC2CD1F16262600233541 /* AppDelegate.swift */,
+				6A0DC2CF1F16262600233541 /* ViewController.swift */,
+				6A0DC2D11F16262600233541 /* Main.storyboard */,
+				6A0DC2D41F16262600233541 /* Assets.xcassets */,
+				6A0DC2D61F16262600233541 /* LaunchScreen.storyboard */,
+				6A0DC2D91F16262600233541 /* Info.plist */,
+			);
+			path = TGPhotoPicker;
+			sourceTree = "<group>";
+		};
+		6A0DC2DF1F16264000233541 /* TGPhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				6A8B7B721F1F8672002D520A /* TGPhotoPicker.bundle */,
+				6A0DC2E01F1628F000233541 /* TGPhotoPicker.swift */,
+				6ADA33141F2767AF00C9A040 /* TGPhotoPickerManager.swift */,
+				6A0DC2E21F16297C00233541 /* TGPhotoM.swift */,
+				6A0DC2E41F16E44800233541 /* TGFetchM.swift */,
+				6A0DC2E61F16E7BB00233541 /* TGPhotoPickerConfig.swift */,
+				6A8B7B6E1F1F7DC7002D520A /* TGPhotoPreviewVC.swift */,
+				6A8B7B701F1F7EC5002D520A /* TGPhotoPreviewCell.swift */,
+				6A8B7B741F206B98002D520A /* TGPhotoImageManager.swift */,
+				6A8B7B761F21BD8F002D520A /* TGPhotoPickerVC.swift */,
+				6A8B7B781F21E0EC002D520A /* TGPhotoFetchOptions.swift */,
+				6A8B7B7A1F21F2B3002D520A /* TGPhotoListVC.swift */,
+				6A3D7E251F2308CC008B7AEE /* TGBottomBar.swift */,
+				6A3D7E271F2345EF008B7AEE /* TGTopBar.swift */,
+				6A3D7E291F2352BE008B7AEE /* TGAlbumPhotoPreviewVC.swift */,
+				6A3D7E2B1F237DBC008B7AEE /* TGPhotoCollectionVC.swift */,
+				6ADA33121F26465F00C9A040 /* TGImage.swift */,
+				6ADA33161F277B2600C9A040 /* TGCameraVC.swift */,
+			);
+			path = TGPhotoPicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6A0DC2C91F16262600233541 /* TGPhotoPicker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6A0DC2DC1F16262600233541 /* Build configuration list for PBXNativeTarget "TGPhotoPicker" */;
+			buildPhases = (
+				6A0DC2C61F16262600233541 /* Sources */,
+				6A0DC2C71F16262600233541 /* Frameworks */,
+				6A0DC2C81F16262600233541 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TGPhotoPicker;
+			productName = TGPhotoPicker;
+			productReference = 6A0DC2CA1F16262600233541 /* TGPhotoPicker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6A0DC2C21F16262600233541 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = targetcloud;
+				TargetAttributes = {
+					6A0DC2C91F16262600233541 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 38C5J53JU9;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6A0DC2C51F16262600233541 /* Build configuration list for PBXProject "TGPhotoPicker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6A0DC2C11F16262600233541;
+			productRefGroup = 6A0DC2CB1F16262600233541 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6A0DC2C91F16262600233541 /* TGPhotoPicker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6A0DC2C81F16262600233541 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A0DC2D81F16262600233541 /* LaunchScreen.storyboard in Resources */,
+				6A0DC2D51F16262600233541 /* Assets.xcassets in Resources */,
+				6A0DC2D31F16262600233541 /* Main.storyboard in Resources */,
+				6A8B7B731F1F8672002D520A /* TGPhotoPicker.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6A0DC2C61F16262600233541 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ADA33151F2767AF00C9A040 /* TGPhotoPickerManager.swift in Sources */,
+				6A3D7E2C1F237DBC008B7AEE /* TGPhotoCollectionVC.swift in Sources */,
+				6A8B7B7B1F21F2B3002D520A /* TGPhotoListVC.swift in Sources */,
+				6A0DC2E11F1628F000233541 /* TGPhotoPicker.swift in Sources */,
+				6A0DC2E71F16E7BB00233541 /* TGPhotoPickerConfig.swift in Sources */,
+				6A8B7B711F1F7EC5002D520A /* TGPhotoPreviewCell.swift in Sources */,
+				6A0DC2D01F16262600233541 /* ViewController.swift in Sources */,
+				6ADA33131F26465F00C9A040 /* TGImage.swift in Sources */,
+				6A3D7E261F2308CC008B7AEE /* TGBottomBar.swift in Sources */,
+				6A0DC2CE1F16262600233541 /* AppDelegate.swift in Sources */,
+				6A3D7E2A1F2352BE008B7AEE /* TGAlbumPhotoPreviewVC.swift in Sources */,
+				6A3D7E281F2345EF008B7AEE /* TGTopBar.swift in Sources */,
+				6ADA33171F277B2600C9A040 /* TGCameraVC.swift in Sources */,
+				6A0DC2E51F16E44800233541 /* TGFetchM.swift in Sources */,
+				6A8B7B6F1F1F7DC7002D520A /* TGPhotoPreviewVC.swift in Sources */,
+				6A8B7B751F206B98002D520A /* TGPhotoImageManager.swift in Sources */,
+				6A8B7B791F21E0EC002D520A /* TGPhotoFetchOptions.swift in Sources */,
+				6A8B7B771F21BD8F002D520A /* TGPhotoPickerVC.swift in Sources */,
+				6A0DC2E31F16297C00233541 /* TGPhotoM.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6A0DC2D11F16262600233541 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A0DC2D21F16262600233541 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6A0DC2D61F16262600233541 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A0DC2D71F16262600233541 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6A0DC2DA1F16262600233541 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6A0DC2DB1F16262600233541 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6A0DC2DD1F16262600233541 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 38C5J53JU9;
+				INFOPLIST_FILE = TGPhotoPicker/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.targetcloud.TGPhotoPicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		6A0DC2DE1F16262600233541 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 38C5J53JU9;
+				INFOPLIST_FILE = TGPhotoPicker/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.targetcloud.TGPhotoPicker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6A0DC2C51F16262600233541 /* Build configuration list for PBXProject "TGPhotoPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A0DC2DA1F16262600233541 /* Debug */,
+				6A0DC2DB1F16262600233541 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6A0DC2DC1F16262600233541 /* Build configuration list for PBXNativeTarget "TGPhotoPicker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6A0DC2DD1F16262600233541 /* Debug */,
+				6A0DC2DE1F16262600233541 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6A0DC2C21F16262600233541 /* Project object */;
+}
