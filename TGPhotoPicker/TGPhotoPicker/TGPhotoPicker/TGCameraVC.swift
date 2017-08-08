@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 
-@available(iOS 10.0, *)
 class TGCameraVC: UIViewController {
 
     var callbackPicutureData: ((Data?) -> ())?

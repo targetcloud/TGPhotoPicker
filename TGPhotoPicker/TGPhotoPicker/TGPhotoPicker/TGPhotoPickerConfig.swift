@@ -34,7 +34,6 @@ enum TGCheckboxType : Int{
     case star
 }
 
-@available(iOS 10.0, *)
 class TGPhotoPickerConfig {
     static let ScreenW = UIScreen.main.bounds.width
     static let ScreenH = UIScreen.main.bounds.height
