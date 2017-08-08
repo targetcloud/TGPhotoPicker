@@ -257,7 +257,7 @@ func upLoadData(){
 ```
 #### 使用链式编程配置时，请在所有属性前加tg_前缀即可
 
-#### 选择指示器各状态组合参数说明
+#### 选择指示器各状态组合参数说明（选择类型checkboxType、大小checkboxCellWH、位置checkboxPosition各状态下都起作用,其他配置参数起作用见下表）
 
 类型 | 未选择状态 | 选择状态 | 删除状态 | 删除高亮状态 | 数字状态| 其他说明
 ------ | ------ | ------ | ------ | ------ | ------ | ------
@@ -275,9 +275,26 @@ func upLoadData(){
 ## diagonalBelt运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/diagonalBelt.gif) 
 
-
 ## circle运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/circle.gif) 
+
+## belt运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/b.gif) 
+
+## square运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/s.gif) 
+
+## onlyCheckbox运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/o.gif) 
+
+## triangle运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/t.gif) 
+
+## heart运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/h.gif) 
+
+## star运行效果
+![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/star.gif) 
 
 
 ## Installation
