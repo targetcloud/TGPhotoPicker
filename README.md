@@ -1,5 +1,7 @@
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/Banners.png" width = "12%" hight = "12%"/>
+
 # TGPhotoPicker
+
 the best photo picker plugin in swift
 
 ![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
@@ -68,25 +70,25 @@ the best photo picker plugin in swift
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2498.PNG" width = "60%" />
 
 ## Recently Updated
-- 0.0.1 丰富的参数，DIY你满意的一款photo picker
+- 0.0.1 丰富的参数，`DIY`你满意的一款photo picker
 
 ## Features
-- [x] 支持链式编程配置，程序员的最爱
-- [x] 支持Cocoapods
-- [x] 支持2种遮罩模式（直接在选择的照片cell上显示遮罩、选择到最大照片数量后其余照片cell显示遮罩）
-- [x] 支持2种删除模式（选择完成后直接点每个照片cell上的删除按钮删除、选择完成后预览单个照片大图时点工具栏上的删除按钮删除）
-- [x] 支持选择指示器选择时的顺序数字显示（每个照片cell的状态有5种状态:未选择、选中状态、数字选中状态、删除状态、按住删除按钮时的状态）
-- [x] 支持2种选择模式（直接选择、预览选择）
-- [x] 预置weibo、wechat 2种成组配置模式，省去多个参数配置，简化为一句代码配置
-- [x] 支持8种选择样式（类型）单勾、圈、方块、带、斜带、三角、心、星
-- [x] 支持4种选择位置（左上、左下、右上、右下）
-- [x] 支持tinColor统一设置风格
-- [x] 支持选择指示器大小调节
+- [x] 支持`链式`编程配置，程序员的最爱
+- [x] 支持`Cocoapods`
+- [x] 支持2种`遮罩`模式（直接在选择的照片cell上显示遮罩、选择到最大照片数量后其余照片cell显示遮罩）
+- [x] 支持2种`删除`模式（选择完成后直接点每个照片cell上的删除按钮删除、选择完成后预览单个照片大图时点工具栏上的删除按钮删除）
+- [x] 支持选择指示器`选择时的顺序`数字显示（每个照片cell的状态有5种状态:未选择、选中状态、数字选中状态、删除状态、按住删除按钮时的状态）
+- [x] 支持2种`选择`模式（直接选择、预览选择）
+- [x] 预置`weibo`、`wechat` 2种成组配置模式，省去多个参数配置，简化为一句代码配置
+- [x] 支持8种`选择样式`（类型）`单勾`、`圈`、`方块`、`带`、`斜带`、`三角`、`心`、`星`
+- [x] 支持4种`选择位置`（左上、左下、右上、右下）
+- [x] 支持`tinColor`统一设置风格
+- [x] 支持选择指示器`大小调节`
 - [x] 轻量级、使用超灵活、功能超强大
 - [x] 用例丰富，快速上手
 
 ## Usage
-总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法取多选照片数据（这个又分两种，用模型或不用模型（直接用分开的数组））
+总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法获取多选照片数据（这个又分两种，用模型或不用模型（直接用`分开的数组`））
 
 #### 使用默认（有界面）
 ```swift
@@ -107,7 +109,7 @@ override func viewDidLoad() {
     }
 ```
 
-#### 其他使用方式（无界面） 模型数组
+#### 其他使用方式（无界面） `模型`数组
 ```swift
 TGPhotoPickerManager.shared.takePhotoModels(true, true) { (array) in
             //示例代码
@@ -119,7 +121,7 @@ TGPhotoPickerManager.shared.takePhotoModels(true, true) { (array) in
         }
 ```
 
-#### 其他使用方式（无界面） 4个分开的数组
+#### 其他使用方式（无界面） 4个`分开独立`的数组（即模型里成员分出来的）
 ```swift
 TGPhotoPickerManager.shared.takePhotos(true, true, { (config) in
             //链式配置
