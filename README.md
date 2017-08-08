@@ -2,13 +2,13 @@
 
 # TGPhotoPicker
 
-the best photo picker plugin in swift
+the best photo picker plugin in swift(iOS10+)
 
 ![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 ![Build](https://img.shields.io/badge/build-passing-green.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)
 ![Platform](https://img.shields.io/cocoapods/p/Pastel.svg?style=flat)
-![Cocoapod](https://img.shields.io/badge/pod-v0.0.1-blue.svg)
+![Cocoapod](https://img.shields.io/badge/pod-v0.0.3-blue.svg)
 
 ## ScreenShots
 
@@ -70,7 +70,7 @@ the best photo picker plugin in swift
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2498.PNG" width = "60%" />
 
 ## Recently Updated
-- 0.0.1 丰富的参数，`DIY`你满意的一款photo picker
+- 0.0.3 丰富的参数，`DIY`你满意的一款photo picker
 
 ## Features
 - [x] 支持`链式`编程配置，程序员的最爱
