@@ -7,6 +7,65 @@ the best photo picker plugin in swift
 ![Platform](https://img.shields.io/cocoapods/p/Pastel.svg?style=flat)
 ![Cocoapod](https://img.shields.io/badge/pod-v0.0.1-blue.svg)
 
+## ScreenShots
+
+#### 1
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2480.PNG" width = "60%" />
+
+#### 2
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2481.PNG" width = "60%" />
+
+#### 3
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2482.PNG" width = "60%" />
+
+#### 4
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2483.PNG" width = "60%" />
+
+#### 5
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2484.PNG" width = "60%" />
+
+#### 6
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2485.PNG" width = "60%" />
+
+#### 7
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2486.PNG" width = "60%" />
+
+#### 8
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2487.PNG" width = "60%" />
+
+#### 9
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2488.PNG" width = "60%" />
+
+#### 10
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2489.PNG" width = "60%" />
+
+#### 11
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2490.PNG" width = "60%" />
+
+#### 12
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2491.PNG" width = "60%" />
+
+#### 13
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2492.PNG" width = "60%" />
+
+#### 14
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2493.PNG" width = "60%" />
+
+#### 15
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2494.PNG" width = "60%" />
+
+#### 16
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2495.PNG" width = "60%" />
+
+#### 17
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2496.PNG" width = "60%" />
+
+#### 18
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2497.PNG" width = "60%" />
+
+#### 19
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2498.PNG" width = "60%" />
+
 ## Recently Updated
 - 0.0.1 丰富的参数，DIY你满意的一款photo picker
 
@@ -264,36 +323,36 @@ func upLoadData(){
 只有勾| 勾色white(0.7) 、checkboxLineW | 勾色tincolor、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | shadowW、shadowH、fontSize、checkboxLineW、checkboxPadding、字色tinColor |
 圈勾| 圈色white(0.3)、border色white(0.7)、 勾色white、checkboxLineW、checkboxPadding |  圈色tincolor、 勾色white，checkboxLineW、 渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 checkboxPadding | 叉色同左 | 叉色removeHighlightedColor | 字色white、圈色tinColor、checkboxPadding | 微博未选择状态勾色clear、微博删除状态勾色white
 方勾| 方色white(0.3)、 勾色white、checkboxLineW、checkboxCorner | 方色tincolor、渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 勾色white、checkboxCorner、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、方色tinColor、checkboxCorner | 
-带勾| 带色white(0.3)、 勾色white、渐变（checkboxBeginngAlpha、0.01）、checkboxLineW、checkboxCorner、checkboxPadding | 带色tincolor、 勾色white、    渐变（checkboxBeginngAlpha、0.01）、 checkboxCorner、checkboxPadding、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、方色tinColor（渐变（checkboxBeginngAlpha、0.01））、checkboxCorner | 
-斜带勾| 带色white(0.3)、 勾色white、checkboxLineW | 带色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | tinColor、字色white |
-三角勾| 角色white(0.3)、 勾色white、checkboxLineW | 角色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | tinColor、字色white |
+带勾| 带色white(0.3)、 勾色white、渐变（checkboxBeginngAlpha、0.01）、checkboxLineW、checkboxCorner、checkboxPadding | 带色tincolor、 勾色white、    渐变（checkboxBeginngAlpha、0.01）、 checkboxCorner、checkboxPadding、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、带色tinColor（渐变（checkboxBeginngAlpha、0.01））、checkboxCorner | 
+斜带勾| 带色white(0.3)、 勾色white、checkboxLineW | 带色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 底色tinColor、字色white |
+三角勾| 角色white(0.3)、 勾色white、checkboxLineW | 角色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 底色tinColor、字色white |
 心| 心色white(0.7)、checkboxLineW、 无勾 | 心色tincolor、 无勾 | 叉色同左、removeType为circle | 叉色removeHighlightedColor | 同circle |
 星 | 星色white(0.3)、border色white(0.7)、isShowBorder、checkboxLineW、无勾 | 星色tincolor、无勾、无border  | 叉色同左、removeType为circle | 叉色removeHighlightedColor | 同circle |
 
 ### 更多使用配置组合效果请download本项目或fork本项目查看
 
-## diagonalBelt运行效果
+#### diagonalBelt运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/diagonalBelt.gif) 
 
-## circle运行效果
+#### circle运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/circle.gif) 
 
-## belt运行效果
+#### belt运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/b.gif) 
 
-## square运行效果
+#### square运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/s.gif) 
 
-## onlyCheckbox运行效果
+#### onlyCheckbox运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/o.gif) 
 
-## triangle运行效果
+#### triangle运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/t.gif) 
 
-## heart运行效果
+#### heart运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/h.gif) 
 
-## star运行效果
+#### star运行效果
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/star.gif) 
 
 
@@ -309,4 +368,4 @@ pod 'TGPhotoPicker'
 - http://blog.csdn.net/callzjy
 - https://github.com/targetcloud/TGImage <img src="https://github.com/targetcloud/TGImage/blob/master/snapShot/Banners.png" width = "12%" hight = "12%"/>
 
-如果你觉得赞，请Star
+如果你觉得赞，请`Star`
