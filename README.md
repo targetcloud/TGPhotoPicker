@@ -1,3 +1,4 @@
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/Banners.png" width = "12%" hight = "12%"/>
 # TGPhotoPicker
 the best photo picker plugin in swift
 
@@ -369,3 +370,5 @@ pod 'TGPhotoPicker'
 - https://github.com/targetcloud/TGImage <img src="https://github.com/targetcloud/TGImage/blob/master/snapShot/Banners.png" width = "12%" hight = "12%"/>
 
 如果你觉得赞，请`Star`
+
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/logo.png" width = "12%" hight = "12%"/>
