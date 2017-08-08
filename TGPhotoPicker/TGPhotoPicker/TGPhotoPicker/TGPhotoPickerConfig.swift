@@ -455,7 +455,7 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_type(type: TGPhotoPickerType) -> TGPhotoPickerConfig {
+    public func tg_type(_ type: TGPhotoPickerType) -> TGPhotoPickerConfig {
         self.type = type
         return self
     }
@@ -467,19 +467,19 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_checkboxPosition(position: TGCheckboxPosition) -> TGPhotoPickerConfig {
+    public func tg_checkboxPosition(_ position: TGCheckboxPosition) -> TGPhotoPickerConfig {
         self.checkboxPosition = position
         return self
     }
     
     @discardableResult
-    public func tg_removePosition(position: TGCheckboxPosition) -> TGPhotoPickerConfig {
+    public func tg_removePosition(_ position: TGCheckboxPosition) -> TGPhotoPickerConfig {
         self.removePosition = position
         return self
     }
     
     @discardableResult
-    public func tg_removeType(type: TGCheckboxType) -> TGPhotoPickerConfig {
+    public func tg_removeType(_ type: TGCheckboxType) -> TGPhotoPickerConfig {
         self.removeType = type
         return self
     }
@@ -491,7 +491,7 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_checkboxType(type: TGCheckboxType)-> TGPhotoPickerConfig {
+    public func tg_checkboxType(_ type: TGCheckboxType)-> TGPhotoPickerConfig {
         self.checkboxType = type
         return self
     }
@@ -694,7 +694,7 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_maxImageCount(max: Int) -> TGPhotoPickerConfig {
+    public func tg_maxImageCount(_ max: Int) -> TGPhotoPickerConfig {
         self.maxImageCount = max
         return self
     }
@@ -724,7 +724,7 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_buttonEdge(edge: UIEdgeInsets) -> TGPhotoPickerConfig {
+    public func tg_buttonEdge(_ edge: UIEdgeInsets) -> TGPhotoPickerConfig {
         self.buttonEdge = edge
         return self
     }
@@ -760,7 +760,7 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_captureDeviceType(type: AVCaptureDeviceType) -> TGPhotoPickerConfig {
+    public func tg_captureDeviceType(_ type: AVCaptureDeviceType) -> TGPhotoPickerConfig {
         self.captureDeviceType = type
         return self
     }

@@ -504,9 +504,9 @@ class ViewController: UIViewController {
         /*
         TGPhotoPickerManager.shared.takePhotos(true, true, { (config) in
             //链式配置
-            config.tg_type(type: TGPhotoPickerType.weibo)
+            config.tg_type(TGPhotoPickerType.weibo)
                 .tg_confirmTitle("我知道了")
-                .tg_maxImageCount(max: 12)
+                .tg_maxImageCount(12)
         }) { (asset, smallImg, bigImg, data) in
             self.picker.tgphotos.removeAll()
             for i in 0..<smallImg.count {
