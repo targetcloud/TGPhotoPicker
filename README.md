@@ -76,8 +76,9 @@ the best photo picker plugin in swift
 - [x] 支持`链式`编程配置，程序员的最爱
 - [x] 支持`Cocoapods`
 - [x] 支持2种`遮罩`模式（直接在选择的照片cell上显示遮罩、选择到最大照片数量后其余照片cell显示遮罩）
+- [x] 支持选择完成后，长按控件的照片cell进行位置调整
 - [x] 支持2种`删除`模式（选择完成后直接点每个照片cell上的删除按钮删除、选择完成后预览单个照片大图时点工具栏上的删除按钮删除）
-- [x] 支持选择指示器`选择时的顺序`数字显示（每个照片cell的状态有5种状态:未选择、选中状态、数字选中状态、删除状态、按住删除按钮时的状态）
+- [x] 支持选择指示器`选择时的顺序`数字显示（每个照片cell的状态有5种状态:未选择、选中状态、数字选中状态、删除状态、按住删除按钮时的高亮状态）
 - [x] 支持2种`选择`模式（直接选择、预览选择）
 - [x] 预置`weibo`、`wechat` 2种成组配置模式，省去多个参数配置，简化为一句代码配置
 - [x] 支持8种`选择样式`（类型）`单勾`、`圈`、`方块`、`带`、`斜带`、`三角`、`心`、`星`
@@ -125,9 +126,9 @@ TGPhotoPickerManager.shared.takePhotoModels(true, true) { (array) in
 ```swift
 TGPhotoPickerManager.shared.takePhotos(true, true, { (config) in
             //链式配置
-            config.tg_type(type: TGPhotoPickerType.weibo)
+            config.tg_type(TGPhotoPickerType.weibo)
                 .tg_confirmTitle("我知道了")
-                .tg_maxImageCount(max: 12)
+                .tg_maxImageCount(12)
         }) { (asset, smallImg, bigImg, data) in
             //示例代码
             self.picker.tgphotos.removeAll()
@@ -319,7 +320,7 @@ func upLoadData(){
 ```
 #### 使用链式编程配置时，请在所有属性前加tg_前缀即可
 
-#### 选择指示器各状态组合参数说明（选择类型checkboxType、大小checkboxCellWH、位置checkboxPosition各状态下都起作用,其他配置参数起作用见下表）
+#### 选择指示器各状态组合参数说明（选择类型checkboxType、大小checkboxCellWH、位置checkboxPosition各状态下都起作用,其他配置参数起作用时机见下表（最佳快速上手请使用官方Demo进行参数调配，参数效果立竿见影））
 
 类型 | 未选择状态 | 选择状态 | 删除状态 | 删除高亮状态 | 数字状态| 其他说明
 ------ | ------ | ------ | ------ | ------ | ------ | ------
