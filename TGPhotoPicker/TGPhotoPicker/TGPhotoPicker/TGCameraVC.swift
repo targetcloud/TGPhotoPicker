@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+@available(iOS 10.0, *)
 class TGCameraVC: UIViewController {
 
     var callbackPicutureData: ((Data?) -> ())?
@@ -62,6 +63,7 @@ class TGCameraVC: UIViewController {
         guard input != nil else {
             return
         }
+        
         imageOutput = AVCapturePhotoOutput()
         session = AVCaptureSession()
         session?.beginConfiguration()

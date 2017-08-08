@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "TGPhotoPicker"
-s.version      = "0.0.1"
+s.version      = "0.0.2"
 s.summary      = "the best photo picker plugin in swift"
 s.homepage     = "https://github.com/targetcloud/TGPhotoPicker"
 s.license      = "MIT"
