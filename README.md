@@ -57,6 +57,24 @@ override func viewDidLoad() {
     }
 ```
 
+#### 带配置(链式)
+```swift
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+        config.tg_type(.wechat)
+              .tg_checkboxLineW(1)
+    }
+```
+
+#### 带配置（单例配置对象）
+```swift
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { _ in
+        TGPhotoPickerConfig.shared.tg_type(.wechat)
+            .tg_checkboxLineW(1)
+            .tg_toolBarH(50)
+            .tg_useChineseAlbumName(true)
+    }
+```
+
 #### 其他使用方式（无界面） `模型`数组
 ```swift
 TGPhotoPickerManager.shared.takePhotoModels(true, true) { (array) in
