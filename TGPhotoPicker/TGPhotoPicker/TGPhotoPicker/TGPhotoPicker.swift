@@ -43,8 +43,8 @@ class TGPhotoPicker: UIView {
         configBlock?(self.config)
         
         if self.config.autoSelectWH {
-            self.config.selectWH = (frame.size.width - (self.config.colCount + 1) * self.config.padding) / self.config.colCount
-            self.config.mainCellWH = (frame.size.width - (self.config.mainColCount + 1) * self.config.padding) / self.config.mainColCount
+            self.config.selectWH = (frame.size.width - (self.config.colCount + (self.config.leftAndRigthNoPadding ? -1 : 1)) * self.config.padding) / self.config.colCount
+            self.config.mainCellWH = (frame.size.width - (self.config.mainColCount + (self.config.leftAndRigthNoPadding ? -1 : 1)) * self.config.padding) / self.config.mainColCount
         }
         
         createCollectionView()
@@ -74,9 +74,9 @@ class TGPhotoPicker: UIView {
         cv.dataSource = self
         cv.contentInset = UIEdgeInsetsMake(
             config.padding,
+            config.leftAndRigthNoPadding ? 0 : config.padding,
             config.padding,
-            config.padding,
-            self.bounds.width - config.mainColCount * config.mainCellWH - config.mainColCount * config.padding
+            self.bounds.width - config.mainColCount * config.mainCellWH - (config.mainColCount + (config.leftAndRigthNoPadding ? -1 : 0)) * config.padding
         )
         cv.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPress)))
         self.addSubview(cv)

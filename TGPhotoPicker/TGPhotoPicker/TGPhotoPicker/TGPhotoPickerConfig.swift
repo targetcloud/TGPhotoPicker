@@ -229,7 +229,7 @@ class TGPhotoPickerConfig {
     /** 照片Cell的高宽,即选择时的呈现的宽高*/
     var selectWH: CGFloat = 80{
         didSet{
-            let maxCellW = (TGPhotoPickerConfig.ScreenW - (colCount+1) * padding)/colCount
+            let maxCellW = (TGPhotoPickerConfig.ScreenW - (colCount+(leftAndRigthNoPadding ? -1 : 1)) * padding)/colCount
             selectWH = selectWH>maxCellW ? maxCellW :(selectWH<60 ? 60 :selectWH)
         }
     }
@@ -237,7 +237,7 @@ class TGPhotoPickerConfig {
     /** 控件本身的Cell的宽高,即选择后的呈现的宽高*/
     var mainCellWH: CGFloat = 80{
         didSet{
-            let maxCellW = (TGPhotoPickerConfig.ScreenW - (colCount+1) * padding)/colCount
+            let maxCellW = (TGPhotoPickerConfig.ScreenW - (mainColCount+(leftAndRigthNoPadding ? -1 : 1)) * padding)/mainColCount
             mainCellWH = mainCellWH>maxCellW ? maxCellW :(mainCellWH<60 ? 60 :mainCellWH)
         }
     }

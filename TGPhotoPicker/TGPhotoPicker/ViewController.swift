@@ -10,12 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     //创建方式1
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200))
+    //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200))
     
     //创建方式2 带配置
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
-//        config.type = .weibo
-//    }
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+        config.type = .weibo
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
