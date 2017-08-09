@@ -13,8 +13,22 @@ class ViewController: UIViewController {
     //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200))
     
     //创建方式2 带配置
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
-        config.type = .weibo
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+//        config.type = .weibo
+//    }
+
+    //创建方式3 带配置(链式)
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+//        config.tg_type(.wechat)
+//              .tg_checkboxLineW(1)
+//    }
+
+    //创建方式4 带配置（单例配置对象）
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { _ in
+        TGPhotoPickerConfig.shared.tg_type(.wechat)
+            .tg_checkboxLineW(1)
+            .tg_toolBarH(50)
+            .tg_useChineseAlbumName(true)
     }
     
     override func viewDidLoad() {
