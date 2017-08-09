@@ -10,64 +10,11 @@ the best photo picker plugin in swift(iOS10+)
 ![Platform](https://img.shields.io/cocoapods/p/Pastel.svg?style=flat)
 ![Cocoapod](https://img.shields.io/badge/pod-v0.0.3-blue.svg)
 
-## ScreenShots
+## Demo Screenshot
 
-#### 1
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2480.PNG" width = "60%" />
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2574.PNG" width = "60%" />
 
-#### 2
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2481.PNG" width = "60%" />
-
-#### 3
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2482.PNG" width = "60%" />
-
-#### 4
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2483.PNG" width = "60%" />
-
-#### 5
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2484.PNG" width = "60%" />
-
-#### 6
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2485.PNG" width = "60%" />
-
-#### 7
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2486.PNG" width = "60%" />
-
-#### 8
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2487.PNG" width = "60%" />
-
-#### 9
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2488.PNG" width = "60%" />
-
-#### 10
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2489.PNG" width = "60%" />
-
-#### 11
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2490.PNG" width = "60%" />
-
-#### 12
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2491.PNG" width = "60%" />
-
-#### 13
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2492.PNG" width = "60%" />
-
-#### 14
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2493.PNG" width = "60%" />
-
-#### 15
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2494.PNG" width = "60%" />
-
-#### 16
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2495.PNG" width = "60%" />
-
-#### 17
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2496.PNG" width = "60%" />
-
-#### 18
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2497.PNG" width = "60%" />
-
-#### 19
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2498.PNG" width = "60%" />
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2575.PNG" width = "60%" />
 
 ## Recently Updated
 - 0.0.3 丰富的参数，`DIY`你满意的一款photo picker
@@ -335,28 +282,91 @@ func upLoadData(){
 
 ### 更多使用配置组合效果请download本项目或fork本项目查看
 
-#### diagonalBelt运行效果
+
+## ScreenShots
+
+#### 1
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2480.PNG" width = "60%" />
+
+#### 2
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2481.PNG" width = "60%" />
+
+#### 3
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2482.PNG" width = "60%" />
+
+#### 4
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2483.PNG" width = "60%" />
+
+#### 5
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2484.PNG" width = "60%" />
+
+#### 6
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2485.PNG" width = "60%" />
+
+#### 7
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2486.PNG" width = "60%" />
+
+#### 8
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2487.PNG" width = "60%" />
+
+#### 9
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2488.PNG" width = "60%" />
+
+#### 10
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2489.PNG" width = "60%" />
+
+#### 11
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2490.PNG" width = "60%" />
+
+#### 12
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2491.PNG" width = "60%" />
+
+#### 13
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2492.PNG" width = "60%" />
+
+#### 14
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2493.PNG" width = "60%" />
+
+#### 15
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2494.PNG" width = "60%" />
+
+#### 16
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2495.PNG" width = "60%" />
+
+#### 17
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2496.PNG" width = "60%" />
+
+#### 18
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2497.PNG" width = "60%" />
+
+#### 19
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2498.PNG" width = "60%" />
+
+
+## 运行效果
+
+#### diagonalBelt
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/diagonalBelt.gif) 
 
-#### circle运行效果
+#### circle
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/circle.gif) 
 
-#### belt运行效果
+#### belt
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/b.gif) 
 
-#### square运行效果
+#### square
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/s.gif) 
 
-#### onlyCheckbox运行效果
+#### onlyCheckbox
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/o.gif) 
 
-#### triangle运行效果
+#### triangle
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/t.gif) 
 
-#### heart运行效果
+#### heart
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/h.gif) 
 
-#### star运行效果
+#### star
 ![](https://github.com/targetcloud/TGPhotoPicker/blob/master/gif/star.gif) 
 
 
