@@ -290,7 +290,7 @@ func upLoadData(){
 类型 | 未选择状态 | 选择状态 | 删除状态 | 删除高亮状态 | 数字状态| 其他说明
 ------ | ------ | ------ | ------ | ------ | ------ | ------
 只有勾| 勾色white(0.7) 、checkboxLineW | 勾色tincolor、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | shadowW、shadowH、fontSize、checkboxLineW、checkboxPadding、字色tinColor |
-圈勾| 圈色white(0.3)、border色white(0.7)、 勾色white、checkboxLineW、checkboxPadding |  圈色tincolor、 勾色white，checkboxLineW、 渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 checkboxPadding | 叉色同左 | 叉色removeHighlightedColor | 字色white、圈色tinColor、checkboxPadding | 微博未选择状态勾色clear、微博删除状态勾色white
+圈勾| 圈色white(0.3)、border色white(0.7)、 勾色white、checkboxLineW、checkboxPadding |  圈色tincolor、 勾色white，checkboxLineW、 渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 checkboxPadding | 叉色同左 | 叉色removeHighlightedColor | 字色white、圈色tinColor、checkboxPadding | 微博未选择状态勾色clear、微博删除状态叉色white
 方勾| 方色white(0.3)、 勾色white、checkboxLineW、checkboxCorner | 方色tincolor、渐变（checkboxBeginngAlpha、checkboxEndingAlpha）、 勾色white、checkboxCorner、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、方色tinColor、checkboxCorner | 
 带勾| 带色white(0.3)、 勾色white、渐变（checkboxBeginngAlpha、0.01）、checkboxLineW、checkboxCorner、checkboxPadding | 带色tincolor、 勾色white、    渐变（checkboxBeginngAlpha、0.01）、 checkboxCorner、checkboxPadding、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 字色white、带色tinColor（渐变（checkboxBeginngAlpha、0.01））、checkboxCorner | 
 斜带勾| 带色white(0.3)、 勾色white、checkboxLineW | 带色tincolor、 勾色white、checkboxLineW | 叉色同左 | 叉色removeHighlightedColor | 底色tinColor、字色white |
