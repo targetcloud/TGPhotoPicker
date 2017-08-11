@@ -23,7 +23,7 @@ the best photo picker plugin in swift(iOS10+)
 - [x] 支持`链式`编程配置，程序员的最爱
 - [x] 支持`Cocoapods`
 - [x] 支持2种`遮罩`模式（直接在选择的照片cell上显示遮罩、选择到最大照片数量后其余照片cell显示遮罩）
-- [x] 支持选择完成后，长按控件的照片cell进行位置调整
+- [x] 支持选择完成后，长按控件的照片cell进行位置调整(iOS `9` 及以上有效)
 - [x] 支持2种`删除`模式（选择完成后直接点每个照片cell上的删除按钮删除、选择完成后预览单个照片大图时点工具栏上的删除按钮删除）
 - [x] 支持选择指示器`选择时的顺序`数字显示（每个照片cell的状态有5种状态:未选择、选中状态、数字选中状态、删除状态、按住删除按钮时的高亮状态）
 - [x] 支持2种`选择`模式（直接选择、预览选择）
@@ -37,6 +37,11 @@ the best photo picker plugin in swift(iOS10+)
 
 ## Usage
 总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法获取多选照片数据（这个又分两种，用模型或不用模型（直接用`分开的数组`））
+
+`提示`:请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS `10`）
+`NSCameraUsageDescription`（Privacy - Camera Usage Description）
+`NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
+`提示`:请先在info.plist中添加以下两个key
 
 #### 使用默认（有界面）
 ```swift
