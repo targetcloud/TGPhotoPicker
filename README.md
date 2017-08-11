@@ -39,9 +39,11 @@ the best photo picker plugin in swift(iOS10+)
 总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法获取多选照片数据（这个又分两种，用模型或不用模型（直接用`分开的数组`））
 
 `提示`:请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS `10`）
-`NSCameraUsageDescription`（Privacy - Camera Usage Description）
-`NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
-`提示`:请先在info.plist中添加以下两个key
+
+> ###### `NSCameraUsageDescription`（Privacy - Camera Usage Description）
+
+> ###### `NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
+
 
 #### 使用默认（有界面）
 ```swift
