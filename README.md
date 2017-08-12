@@ -48,13 +48,14 @@ the best photo picker plugin in swift(iOS8+)
 ## Usage
 总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法获取多选照片数据（这个又分两种，用模型或不用模型（直接用`分开的数组`））
 
-`提示:请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS10）`
+###### 提示:
 
-> ###### `NSCameraUsageDescription`（Privacy - Camera Usage Description）
+`1、请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS10）`
 
-> ###### `NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
+`NSCameraUsageDescription`（Privacy - Camera Usage Description）
+`NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
 
-`作者的Xcode为8.3.3（8E3004b）若你的版本过低，可能会在TGPhotoPickerConfig.swift文件的case .smartAlbumScreenshots:处出现错误提示:Enum case 'smartAlbumScreenshots' not found in type 'PHAssetCollectionSubtype'   报错原因是这是iOS10.2/10.3新增两个值,    解决办法:1、请升级你的Xcode 2、注释相关代码`
+`2、作者的Xcode为8.3.3（8E3004b）若你的版本过低，可能会在TGPhotoPickerConfig.swift文件的case .smartAlbumScreenshots:处出现错误提示:Enum case 'smartAlbumScreenshots' not found in type 'PHAssetCollectionSubtype'   报错原因是这是iOS10.2/10.3新增两个值,    解决办法:1、请升级你的Xcode 2、注释相关代码`
 
 #### 使用默认（有界面）
 ```swift
