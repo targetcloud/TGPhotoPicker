@@ -139,8 +139,14 @@ func upLoadData(){
     }
 ```
 
-#### 可以配置的属性（以下为部分可以配置的参数,完整配置参数见TGPhotoPickerConfig.swift（其中官方Demo中列出了主要的24个参数的使用效果））
+#### 可以配置的属性（以下为部分可以配置的参数,完整配置参数见TGPhotoPickerConfig.swift（其中官方Demo中列出了主要的26个参数的使用效果））
 ``` swift
+    /** 拍照后是否保存照片到相册*/
+    var saveImageToPhotoAlbum: Bool = false
+    
+    /** 使用iOS8相机: false 根据iOS版本判断使用iOS10或iOS8相机; true 指定使用iOS8相机*/
+    var useiOS8Camera: Bool = false
+    
     /** 与useCustomSmartCollectionsMask结合使用,当useCustomSmartCollectionsMask为true时过滤需要显示smartAlbum的Album类型*/
     customSmartCollections 
     
