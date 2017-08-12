@@ -54,6 +54,7 @@ the best photo picker plugin in swift(iOS8+)
 
 > ###### `NSPhotoLibraryUsageDescription`（Privacy - Photo Library Usage Description）
 
+`作者的Xcode为8.3.3（8E3004b）若你的版本过低，可能会在TGPhotoPickerConfig.swift文件的case .smartAlbumScreenshots:处出现错误提示:Enum case 'smartAlbumScreenshots' not found in type 'PHAssetCollectionSubtype'   报错原因是这是iOS10.2/10.3新增两个值,    解决办法:1、请升级你的Xcode 2、注释相关代码`
 
 #### 使用默认（有界面）
 ```swift
