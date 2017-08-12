@@ -12,7 +12,7 @@ the best photo picker plugin in swift(iOS8+)
 
 ## Demo Screenshot
 
-###### 照片选择界面
+###### 照片选择界面（.weibo）更多效果在下面哦:）
 
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2574.PNG" width = "60%" />
 
