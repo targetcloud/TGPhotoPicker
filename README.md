@@ -2,13 +2,13 @@
 
 # TGPhotoPicker
 
-the best photo picker plugin in swift(iOS10+)
+the best photo picker plugin in swift(iOS8+)
 
 ![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 ![Build](https://img.shields.io/badge/build-passing-green.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)
 ![Platform](https://img.shields.io/cocoapods/p/Pastel.svg?style=flat)
-![Cocoapod](https://img.shields.io/badge/pod-v0.0.3-blue.svg)
+![Cocoapod](https://img.shields.io/badge/pod-v0.0.4-blue.svg)
 
 ## Demo Screenshot
 
@@ -17,6 +17,7 @@ the best photo picker plugin in swift(iOS10+)
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2575.PNG" width = "60%" />
 
 ## Recently Updated
+- 0.0.4 新增11个属性，向下兼容iOS8，其中最主要的新增功能是2个，1是允许用户选择使用iOS8或iOS10拍照功能，推荐仍使用iOS8，默认使用iOS10;2是拍照时是否同时把拍照结果保存到系统相册中去，默认不保存
 - 0.0.3 丰富的参数，`DIY`你满意的一款photo picker
 
 ## Features
@@ -32,13 +33,14 @@ the best photo picker plugin in swift(iOS10+)
 - [x] 支持4种`选择位置`（左上、左下、右上、右下）
 - [x] 支持`tinColor`统一设置风格
 - [x] 支持选择指示器`大小调节`
+- [x] 自由选择iOS8或iOS10拍照功能
 - [x] 轻量级、使用超灵活、功能超强大
 - [x] 用例丰富，快速上手
 
 ## Usage
 总体分为2种使用方式，有界面的话，用TGPhotoPicker实例化（即多选照片选择完成后把数据呈现在控件上），不需要界面的话用TGPhotoPickerManager.shared.takePhotoModels单例方法获取多选照片数据（这个又分两种，用模型或不用模型（直接用`分开的数组`））
 
-`提示`:请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS `10`）
+`提示:请先在info.plist中添加以下两个key,以请求相机相册的访问权限（iOS10）`
 
 > ###### `NSCameraUsageDescription`（Privacy - Camera Usage Description）
 
