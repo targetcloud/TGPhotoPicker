@@ -12,9 +12,17 @@ the best photo picker plugin in swift(iOS8+)
 
 ## Demo Screenshot
 
+###### 照片选择界面
+
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2574.PNG" width = "60%" />
 
+###### 参数调节界面
+
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2575.PNG" width = "60%" />
+
+###### 自定义拍照界面
+
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2584.PNG" width = "60%" />
 
 ## Recently Updated
 - 0.0.4 新增11个属性，向下兼容iOS8，其中最主要的新增功能是2个，1是允许用户选择使用iOS8或iOS10拍照功能，推荐仍使用iOS8，默认使用iOS10;2是拍照时是否同时把拍照结果保存到系统相册中去，默认不保存
