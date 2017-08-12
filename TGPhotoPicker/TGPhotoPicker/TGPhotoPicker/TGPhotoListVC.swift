@@ -148,7 +148,7 @@ class TGPhotoListVC: UITableViewController {
         PHPhotoLibrary.shared().register(self)
         setupTableView()
         setupNavigationBar()
-        loadAlbums(false)
+        loadAlbums(true)
     }
     
     private func setupNavigationBar(){
@@ -198,8 +198,9 @@ class TGPhotoListVC: UITableViewController {
                 self.filterFetchResult(collection: topUserAlbumItem)
             }
         }
-
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     private func filterFetchResult(collection: PHAssetCollection){
@@ -225,9 +226,9 @@ class TGPhotoListVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! TGPhotoListCell
         cell.asset = self.albums[indexPath.row].fetchResult.firstObject as? PHAsset
         cell.albumTitleAndCount = (TGPhotoPickerConfig.shared.useChineseAlbumName ?
-            TGPhotoPickerConfig.getChineseAlbumName(self.albums[indexPath.row].assetType,self.albums[indexPath.row].name) :
-            self.albums[indexPath.row].name,
-                                   self.albums[indexPath.row].fetchResult.count)
+                TGPhotoPickerConfig.getChineseAlbumName(self.albums[indexPath.row].assetType,self.albums[indexPath.row].name) :
+                self.albums[indexPath.row].name,
+                                       self.albums[indexPath.row].fetchResult.count)
         return cell
     }
  
