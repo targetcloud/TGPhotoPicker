@@ -301,6 +301,36 @@ class ViewController: UIViewController {
         leftAndRigthNoPaddingButton.isSelected = TGPhotoPickerConfig.shared.leftAndRigthNoPadding
         leftAndRigthNoPaddingButton.addTarget(self,action: #selector(leftAndRigthNoPaddingAction(_:)),for: UIControlEvents.touchUpInside)
         self.view.addSubview(leftAndRigthNoPaddingButton)
+        
+        let useiOS8CameraButton: UIButton = UIButton(frame: CGRect(x: leftAndRigthNoPaddingButton.frame.maxX, y: TGPhotoPickerConfig.ScreenH-100, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        useiOS8CameraButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        useiOS8CameraButton.setTitle("useiOS8Camera", for: .normal)
+        useiOS8CameraButton.setTitleColor(.white, for: .normal)
+        useiOS8CameraButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        useiOS8CameraButton.backgroundColor = self.view.backgroundColor
+        useiOS8CameraButton.isSelected = TGPhotoPickerConfig.shared.useiOS8Camera
+        useiOS8CameraButton.addTarget(self,action: #selector(useiOS8CameraAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(useiOS8CameraButton)
+        
+        let saveImageButton: UIButton = UIButton(frame: CGRect(x: 0, y: TGPhotoPickerConfig.ScreenH-120, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        saveImageButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        saveImageButton.setTitle("saveImage", for: .normal)
+        saveImageButton.setTitleColor(.white, for: .normal)
+        saveImageButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        saveImageButton.backgroundColor = self.view.backgroundColor
+        saveImageButton.isSelected = TGPhotoPickerConfig.shared.saveImageToPhotoAlbum
+        saveImageButton.addTarget(self,action: #selector(saveImageAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(saveImageButton)
+    }
+    
+    func saveImageAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.saveImageToPhotoAlbum = sender.isSelected
+    }
+    
+    func useiOS8CameraAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.useiOS8Camera = sender.isSelected
     }
     
     func isRemoveButtonHiddenAction(_ sender: UIButton) {

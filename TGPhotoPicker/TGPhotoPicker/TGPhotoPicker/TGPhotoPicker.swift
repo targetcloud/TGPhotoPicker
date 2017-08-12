@@ -78,7 +78,9 @@ class TGPhotoPicker: UIView {
             config.padding,
             self.bounds.width - config.mainColCount * config.mainCellWH - (config.mainColCount + (config.leftAndRigthNoPadding ? -1 : 0)) * config.padding
         )
-        cv.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPress)))
+        if #available(iOS 9.0, *) {
+            cv.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPress)))
+        }
         self.addSubview(cv)
         collectionView = cv
     }
@@ -106,6 +108,7 @@ extension TGPhotoPicker : UICollectionViewDataSource{
         return cell
     }
     
+    @available(iOS 9.0, *)
     @objc fileprivate func longPress(sender: UILongPressGestureRecognizer){
         switch sender.state {
         case UIGestureRecognizerState.began:
@@ -188,21 +191,55 @@ extension TGPhotoPicker : UICollectionViewDelegate{
             self.ipc.delegate = self
             self.camera()
             */
-            let cameraVC = TGCameraVC()
-            cameraVC.callbackPicutureData = { [weak self] imgData in
-                let bigImg = UIImage(data:imgData!)
-                let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
-                let smallImg = bigImg
-                let model = TGPhotoM()
-                model.bigImage = bigImg
-                model.imageData = imgData
-                model.smallImage = smallImg
-                self?.tgphotos.append(model)
-                DispatchQueue.main.async {
-                    self?.collectionView?.reloadData()
+            if TGPhotoPickerConfig.shared.useiOS8Camera{
+                let cameraVC = TGCameraVCForiOS8()
+                cameraVC.callbackPicutureData = { [weak self] imgData in
+                    let bigImg = UIImage(data:imgData!)
+                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                    let smallImg = bigImg
+                    let model = TGPhotoM()
+                    model.bigImage = bigImg
+                    model.imageData = imgData
+                    model.smallImage = smallImg
+                    self?.tgphotos.append(model)
+                    DispatchQueue.main.async {
+                        self?.collectionView?.reloadData()
+                    }
                 }
+                self.vc?.present(cameraVC, animated: true, completion: nil)
+            }else if #available(iOS 10.0, *) {
+                let cameraVC = TGCameraVC()
+                cameraVC.callbackPicutureData = { [weak self] imgData in
+                    let bigImg = UIImage(data:imgData!)
+                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                    let smallImg = bigImg
+                    let model = TGPhotoM()
+                    model.bigImage = bigImg
+                    model.imageData = imgData
+                    model.smallImage = smallImg
+                    self?.tgphotos.append(model)
+                    DispatchQueue.main.async {
+                        self?.collectionView?.reloadData()
+                    }
+                }
+                self.vc?.present(cameraVC, animated: true, completion: nil)
+            }else{
+                let cameraVC = TGCameraVCForiOS8()
+                cameraVC.callbackPicutureData = { [weak self] imgData in
+                    let bigImg = UIImage(data:imgData!)
+                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                    let smallImg = bigImg
+                    let model = TGPhotoM()
+                    model.bigImage = bigImg
+                    model.imageData = imgData
+                    model.smallImage = smallImg
+                    self?.tgphotos.append(model)
+                    DispatchQueue.main.async {
+                        self?.collectionView?.reloadData()
+                    }
+                }
+                self.vc?.present(cameraVC, animated: true, completion: nil)
             }
-            self.vc?.present(cameraVC, animated: true, completion: nil)
         }
         
         let action2 = UIAlertAction(title: config.selectTitle, style: .default) { (action) in
@@ -349,12 +386,12 @@ class TGPickerCell: UICollectionViewCell {
         return UIImage.size(width: M, height: M)
             .color(.clear)
             .border(color: .clear)
-            .border(width: 1)
+            .border(width: TGPhotoPickerConfig.shared.checkboxPadding)
             .image
             .with({ context in
                 context.setLineCap(.round)
                 UIColor.lightGray.setStroke()
-                context.setLineWidth(2)
+                context.setLineWidth(TGPhotoPickerConfig.shared.checkboxLineW)
                 context.move(to: CGPoint(x: M * 0.25, y: M * 0.5))
                 context.addLine(to: CGPoint(x: M * 0.75, y: M * 0.5))
                 context.move(to: CGPoint(x: M * 0.5, y: M * 0.25))
@@ -363,7 +400,7 @@ class TGPickerCell: UICollectionViewCell {
                 
                 UIColor.lightGray.withAlphaComponent(0.9).setStroke()
                 context.setLineDash(phase: 0,lengths: [10,5])
-                context.setLineWidth(1)
+                context.setLineWidth(TGPhotoPickerConfig.shared.checkboxLineW)
                 context.move(to: CGPoint(x:1, y: 1))
                 context.addLine(to: CGPoint(x: M-1, y: 1))
                 context.move(to: CGPoint(x: M-1, y: 1))

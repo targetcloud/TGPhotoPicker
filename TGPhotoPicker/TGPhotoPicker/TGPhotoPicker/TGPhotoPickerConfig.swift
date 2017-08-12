@@ -10,20 +10,20 @@ import UIKit
 import AVFoundation
 import Photos
 
-enum TGPhotoPickerType : Int {
+enum TGPhotoPickerType: Int {
     case normal
     case wechat
     case weibo
 }
 
-enum TGCheckboxPosition : Int{
+enum TGCheckboxPosition: Int{
     case topLeft
     case topRight
     case bottomLeft
     case bottomRight
 }
 
-enum TGCheckboxType : Int{
+enum TGCheckboxType: Int{
     case onlyCheckbox
     case circle
     case square
@@ -34,13 +34,24 @@ enum TGCheckboxType : Int{
     case star
 }
 
+enum TGCaptureDeviceType: String{
+    case builtInMicrophone = "AVCaptureDeviceTypeBuiltInMicrophone"
+    case builtInWideAngleCamera = "AVCaptureDeviceTypeBuiltInWideAngleCamera"
+    case builtInTelephotoCamera = "AVCaptureDeviceTypeBuiltInTelephotoCamera"
+    case builtInDualCamera = "AVCaptureDeviceTypeBuiltInDualCamera"
+}
+
 class TGPhotoPickerConfig {
     static let ScreenW = UIScreen.main.bounds.width
     static let ScreenH = UIScreen.main.bounds.height
     static let factor: CGFloat = 0.111111
     
     static let shared : TGPhotoPickerConfig = TGPhotoPickerConfig()
-    private init(){}
+    private init(){
+        //如果相加的宽大于屏宽 那么需要减少每个cell的宽(iPhone 5)
+        let maxCellW = (TGPhotoPickerConfig.ScreenW - (mainColCount+(leftAndRigthNoPadding ? -1 : 1)) * padding)/mainColCount
+        mainCellWH = mainCellWH>maxCellW ? maxCellW : mainCellWH
+    }
     
     /** 与useCustomSmartCollectionsMask结合使用,当useCustomSmartCollectionsMask为true时过滤需要显示smartAlbum的Album类型*/
     var customSmartCollections = [
@@ -293,6 +304,24 @@ class TGPhotoPickerConfig {
     /** 确定按钮的标题*/
     var confirmTitle  = "确定"
     
+    /** 相机权限*/
+    var cameraUsage = "相机权限未开启"
+    var cameraUsageTip = "请您到 设置->隐私->相机 开启访问权限"
+    
+    /** 拍照后是否保存照片到相册*/
+    var saveImageToPhotoAlbum: Bool = false
+    
+    var saveImageSuccessTip = "保存图片成功"
+    var saveImageFailTip = "保存图片失败"
+    var saveImageTip = "保存图片结果提示"
+    
+    /** 使用iOS8相机: false 根据iOS版本判断使用iOS10或iOS8相机; true 指定使用iOS8相机*/
+    var useiOS8Camera: Bool = false
+    
+    /** 相册权限*/
+    var PhotoLibraryUsage = "照片权限未开启"
+    var PhotoLibraryUsageTip = "请您到 设置->隐私->照片 开启访问权限"
+    
     /** 选择数量达到上限时的提示文字, #为占位符*/
     var errorImageMaxSelect = "图片选择最多不能超过#张"
     
@@ -352,6 +381,9 @@ class TGPhotoPickerConfig {
         }
     }
     
+    /** alertView Tag 用于代理*/
+    var alertViewTag: Int = 9999
+    
     /** 缓存的选择顺序图像,自动生成*/
     var cacheNumerImageArr = [UIImage]()
     
@@ -363,6 +395,13 @@ class TGPhotoPickerConfig {
     var takeWH: CGFloat = 60{
         didSet{
             takeWH = takeWH < 50 ? 50 : (takeWH > 80 ? 80 : takeWH)
+        }
+    }
+    
+    /** 对焦视图大小*/
+    var focusViewWH: CGFloat = 80{
+        didSet{
+            focusViewWH = focusViewWH < 50 ? 50 : (focusViewWH > 80 ? 80 : focusViewWH)
         }
     }
     
@@ -390,7 +429,7 @@ class TGPhotoPickerConfig {
     var videoGravity: String = AVLayerVideoGravityResizeAspectFill
     
     /** 广角*/
-    var captureDeviceType: AVCaptureDeviceType = .builtInWideAngleCamera
+    var captureDeviceType: TGCaptureDeviceType = .builtInWideAngleCamera
     
     /** 预览Padding*/
     var previewPadding: CGFloat = 15
@@ -463,6 +502,12 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_checkboxCorner(_ corner: CGFloat) -> TGPhotoPickerConfig {
         self.checkboxCorner = corner
+        return self
+    }
+    
+    @discardableResult
+    public func tg_focusViewWH(_ wh: CGFloat) -> TGPhotoPickerConfig {
+        self.focusViewWH = wh
         return self
     }
     
@@ -622,6 +667,54 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
+    public func tg_cameraUsage(_ str: String) -> TGPhotoPickerConfig {
+        self.cameraUsage = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_cameraUsageTip(_ str: String) -> TGPhotoPickerConfig {
+        self.cameraUsageTip = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_saveImageToPhotoAlbum(_ save: Bool) -> TGPhotoPickerConfig {
+        self.saveImageToPhotoAlbum = save
+        return self
+    }
+    
+    @discardableResult
+    public func tg_PhotoLibraryUsage(_ str: String) -> TGPhotoPickerConfig {
+        self.PhotoLibraryUsage = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_saveImageSuccessTip(_ str: String) -> TGPhotoPickerConfig {
+        self.saveImageSuccessTip = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_saveImageFailTip(_ str: String) -> TGPhotoPickerConfig {
+        self.saveImageFailTip = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_saveImageTip(_ str: String) -> TGPhotoPickerConfig {
+        self.saveImageTip = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_PhotoLibraryUsageTip(_ str: String) -> TGPhotoPickerConfig {
+        self.PhotoLibraryUsageTip = str
+        return self
+    }
+    
+    @discardableResult
     public func tg_leftTitle(_ str: String) -> TGPhotoPickerConfig {
         self.leftTitle = str
         return self
@@ -688,6 +781,12 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
+    public func tg_useiOS8Camera(_ use: Bool) -> TGPhotoPickerConfig {
+        self.useiOS8Camera = use
+        return self
+    }
+    
+    @discardableResult
     public func tg_disabledColor(_ color: UIColor) -> TGPhotoPickerConfig {
         self.disabledColor = color
         return self
@@ -696,6 +795,12 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_maxImageCount(_ max: Int) -> TGPhotoPickerConfig {
         self.maxImageCount = max
+        return self
+    }
+    
+    @discardableResult
+    public func tg_alertViewTag(_ tag: Int) -> TGPhotoPickerConfig {
+        self.alertViewTag = tag
         return self
     }
     
@@ -760,7 +865,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_captureDeviceType(_ type: AVCaptureDeviceType) -> TGPhotoPickerConfig {
+    @available(iOS 10.0, *)
+    public func tg_captureDeviceType(_ type: TGCaptureDeviceType) -> TGPhotoPickerConfig {
         self.captureDeviceType = type
         return self
     }

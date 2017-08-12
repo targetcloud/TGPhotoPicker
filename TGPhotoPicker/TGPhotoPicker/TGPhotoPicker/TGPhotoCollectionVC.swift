@@ -10,7 +10,6 @@ import UIKit
 import Photos
 
 private let reuseIdentifier = "TGPhotoCell"
-private let itemWH = (TGPhotoPickerConfig.ScreenW - (TGPhotoPickerConfig.shared.colCount + (TGPhotoPickerConfig.shared.leftAndRigthNoPadding ? -1 : 1)) * TGPhotoPickerConfig.shared.padding) / TGPhotoPickerConfig.shared.colCount
 
 protocol TGPhotoCollectionViewCellDelegate: class {
     func selectNumberChange(number: Int,isRemove: Bool)
@@ -23,6 +22,10 @@ class TGPhotoCell: UICollectionViewCell {
     var model : PHAsset?
     var assetId: String?
     var indexPath: IndexPath?
+    
+    var itemWH:CGFloat{
+        return (TGPhotoPickerConfig.ScreenW - (TGPhotoPickerConfig.shared.colCount + (TGPhotoPickerConfig.shared.leftAndRigthNoPadding ? -1 : 1)) * TGPhotoPickerConfig.shared.padding) / TGPhotoPickerConfig.shared.colCount
+    }
     
     var photoSelectedIndex: Int = -1{
         didSet{
@@ -141,14 +144,14 @@ class TGPhotoCell: UICollectionViewCell {
     }
     
     private lazy var maskV: UIView = {
-        let mask = UIView(frame: CGRect(x: 0, y: 0, width: itemWH, height: itemWH))
+        let mask = UIView(frame: CGRect(x: 0, y: 0, width: self.itemWH, height: self.itemWH))
         mask.backgroundColor = UIColor.white.withAlphaComponent(TGPhotoPickerConfig.shared.maskAlpha)
         mask.isHidden = true
         return mask
     }()
     
     private lazy var selectMaskV: UIView = {
-        let mask = UIView(frame: CGRect(x: 0, y: 0, width: itemWH, height: itemWH))
+        let mask = UIView(frame: CGRect(x: 0, y: 0, width: self.itemWH, height: self.itemWH))
         mask.backgroundColor = UIColor.black.withAlphaComponent(TGPhotoPickerConfig.shared.maskAlpha)
         mask.isHidden = true
         return mask
@@ -157,7 +160,7 @@ class TGPhotoCell: UICollectionViewCell {
     private lazy var photoImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.frame = CGRect(x: 0, y: 0, width: itemWH, height: itemWH)
+        iv.frame = CGRect(x: 0, y: 0, width: self.itemWH, height: self.itemWH)
         iv.clipsToBounds = true
         return iv
     }()
@@ -172,12 +175,12 @@ class TGPhotoCell: UICollectionViewCell {
         case .topLeft:
             break
         case .topRight:
-            x = itemWH - imageTuples.size.width
+            x = self.itemWH - imageTuples.size.width
         case .bottomLeft:
-            y = itemWH - imageTuples.size.height
+            y = self.itemWH - imageTuples.size.height
         case .bottomRight:
-            x = itemWH - imageTuples.size.width
-            y = itemWH - imageTuples.size.height
+            x = self.itemWH - imageTuples.size.width
+            y = self.itemWH - imageTuples.size.height
         }
         btn.frame = CGRect(x: x, y: y, width: imageTuples.size.width, height: imageTuples.size.height)
         btn.addTarget(self, action: #selector(selectClicked), for: .touchUpInside)
@@ -303,6 +306,7 @@ class TGPhotoCollectionVC: UICollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = TGPhotoPickerConfig.shared.padding
         layout.minimumLineSpacing = TGPhotoPickerConfig.shared.padding
+        let itemWH:CGFloat = (TGPhotoPickerConfig.ScreenW - (TGPhotoPickerConfig.shared.colCount + (TGPhotoPickerConfig.shared.leftAndRigthNoPadding ? -1 : 1)) * TGPhotoPickerConfig.shared.padding) / TGPhotoPickerConfig.shared.colCount
         layout.itemSize = CGSize(width:itemWH, height: itemWH)
         return layout
     }

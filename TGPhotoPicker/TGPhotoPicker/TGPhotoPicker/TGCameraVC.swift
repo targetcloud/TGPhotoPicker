@@ -8,7 +8,9 @@
 
 import UIKit
 import AVFoundation
+import Photos
 
+@available(iOS 10.0, *)
 class TGCameraVC: UIViewController {
 
     var callbackPicutureData: ((Data?) -> ())?
@@ -52,7 +54,7 @@ class TGCameraVC: UIViewController {
     private func setupCamera() {
         AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { success in
             if !success {
-                let alertVC = UIAlertController(title: "相机权限未开启", message: "请您到 设置->隐私->相机 开启访问权限", preferredStyle: .actionSheet)
+                let alertVC = UIAlertController(title: TGPhotoPickerConfig.shared.cameraUsage, message: TGPhotoPickerConfig.shared.cameraUsageTip, preferredStyle: .actionSheet)
                 alertVC.addAction(UIAlertAction(title: TGPhotoPickerConfig.shared.confirmTitle, style: .default, handler: nil))
                 self.present(alertVC, animated: true, completion: nil)
             }
@@ -82,14 +84,17 @@ class TGCameraVC: UIViewController {
     }
     
     private func cameraWithPosistion(_ position: AVCaptureDevicePosition) -> AVCaptureDevice {
-        return AVCaptureDevice.defaultDevice(withDeviceType: TGPhotoPickerConfig.shared.captureDeviceType, mediaType: AVMediaTypeVideo, position: position)
+        let type = AVCaptureDeviceType(rawValue: TGPhotoPickerConfig.shared.captureDeviceType.rawValue)
+        return AVCaptureDevice.defaultDevice(withDeviceType: type, mediaType: AVMediaTypeVideo, position: position)
     }
     
     private func setupUI() {
         let takeButton = UIButton(frame: CGRect(x: 0, y: 0, width: TGPhotoPickerConfig.shared.takeWH, height: TGPhotoPickerConfig.shared.takeWH))
         takeButton.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - TGPhotoPickerConfig.shared.buttonEdge.bottom)
-        takeButton.setImage(UIImage.size(width: TGPhotoPickerConfig.shared.takeWH, height: TGPhotoPickerConfig.shared.takeWH).border(width: 3).border(color: .white).color(UIColor(white: 0.9, alpha: 1)).corner(radius: TGPhotoPickerConfig.shared.takeWH / 2).image +
-            UIImage.size(width: TGPhotoPickerConfig.shared.takeWH - 8, height: TGPhotoPickerConfig.shared.takeWH - 8).color(UIColor(white: 0.95, alpha: 1) ).corner(radius: (TGPhotoPickerConfig.shared.takeWH - 8) / 2).image, for: .normal)
+        takeButton.setImage(UIImage.size(width: TGPhotoPickerConfig.shared.takeWH, height: TGPhotoPickerConfig.shared.takeWH).border(width: 3).border(color: .white).color(.clear).corner(radius: TGPhotoPickerConfig.shared.takeWH / 2).image +
+            UIImage.size(width: TGPhotoPickerConfig.shared.takeWH - 10, height: TGPhotoPickerConfig.shared.takeWH - 10).color(UIColor(white: 0.95, alpha: 1) ).corner(radius: (TGPhotoPickerConfig.shared.takeWH - 10) / 2).image, for: .normal)
+        takeButton.setImage(UIImage.size(width: TGPhotoPickerConfig.shared.takeWH, height: TGPhotoPickerConfig.shared.takeWH).border(width: 3).border(color: .white).color(.clear).corner(radius: TGPhotoPickerConfig.shared.takeWH / 2).image +
+            UIImage.size(width: TGPhotoPickerConfig.shared.takeWH - 10, height: TGPhotoPickerConfig.shared.takeWH - 10).color(UIColor(white: 0.8, alpha: 1) ).corner(radius: (TGPhotoPickerConfig.shared.takeWH - 10) / 2).image, for: .highlighted)
         takeButton.addTarget(self, action: #selector(takePhotoAction), for: .touchUpInside)
         view.addSubview(takeButton)
         
@@ -113,8 +118,8 @@ class TGCameraVC: UIViewController {
         backButton.setImage(UIImage.size(width: TGPhotoPickerConfig.shared.takeWH * 0.4, height: TGPhotoPickerConfig.shared.takeWH * 0.4)
             .corner(radius: TGPhotoPickerConfig.shared.takeWH * 0.2)
             .color(.clear)
-//            .border(color: .white)
-//            .border(width: 1)
+            .border(color: UIColor.white.withAlphaComponent(0.7))
+            .border(width: TGPhotoPickerConfig.shared.isShowBorder ? TGPhotoPickerConfig.shared.checkboxLineW : 0)
             .image
             .with({ context in
                 context.setLineCap(.round)
@@ -134,21 +139,24 @@ class TGCameraVC: UIViewController {
         showImageContainerView = UIView(frame: view.bounds)
         showImageContainerView?.backgroundColor = TGPhotoPickerConfig.shared.previewBGColor
         view.addSubview(showImageContainerView!)
+        
         let height = showImageContainerView!.bounds.height - TGPhotoPickerConfig.shared.takeWH - TGPhotoPickerConfig.shared.buttonEdge.bottom - TGPhotoPickerConfig.shared.previewPadding * 2
         showImageView = UIImageView(frame: CGRect(x: TGPhotoPickerConfig.shared.previewPadding, y: TGPhotoPickerConfig.shared.previewPadding * 2, width: showImageContainerView!.bounds.width - 2 * TGPhotoPickerConfig.shared.previewPadding, height: height))
         showImageView?.contentMode = .scaleAspectFit
         showImageContainerView?.addSubview(showImageView!)
         showImageContainerView?.isHidden = true
-        let giveupButton = createImageOperatorButton(nil, CGPoint(x: TGPhotoPickerConfig.shared.takeWH * 1.5, y: showImageContainerView!.bounds.height - TGPhotoPickerConfig.shared.takeWH * 1.5), TGPhotoPickerConfig.shared.getCheckboxImage(true, true, .circle, TGPhotoPickerConfig.shared.takeWH * 0.8).unselect)
+        
+        let giveupButton = createImageOperatorButton(nil, CGPoint(x: TGPhotoPickerConfig.shared.takeWH * 1.5, y: showImageContainerView!.bounds.height - TGPhotoPickerConfig.shared.takeWH * 1.5), TGPhotoPickerConfig.shared.getCheckboxImage(true, true, .circle, TGPhotoPickerConfig.shared.takeWH * 0.7).unselect)
         giveupButton.addTarget(self, action: #selector(giveupImageAction), for: .touchUpInside)
         showImageContainerView?.addSubview(giveupButton)
-        let ensureButton = createImageOperatorButton(nil, CGPoint(x: showImageContainerView!.bounds.width - TGPhotoPickerConfig.shared.takeWH * 1.5, y: showImageContainerView!.bounds.height - TGPhotoPickerConfig.shared.takeWH * 1.5), TGPhotoPickerConfig.shared.getCheckboxImage(true, false, .circle, TGPhotoPickerConfig.shared.takeWH * 0.8).select)
+        
+        let ensureButton = createImageOperatorButton(nil, CGPoint(x: showImageContainerView!.bounds.width - TGPhotoPickerConfig.shared.takeWH * 1.5, y: showImageContainerView!.bounds.height - TGPhotoPickerConfig.shared.takeWH * 1.5), TGPhotoPickerConfig.shared.getCheckboxImage(true, false, .circle, TGPhotoPickerConfig.shared.takeWH * 0.7).select)
         ensureButton.addTarget(self, action: #selector(useImageAction), for: .touchUpInside)
         showImageContainerView?.addSubview(ensureButton)
     }
     
     private func createImageOperatorButton(_ title: String?, _ center: CGPoint, _ img: UIImage?) -> UIButton {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: TGPhotoPickerConfig.shared.takeWH * 0.8, height: TGPhotoPickerConfig.shared.takeWH * 0.8))
+        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: TGPhotoPickerConfig.shared.takeWH * 0.7, height: TGPhotoPickerConfig.shared.takeWH * 0.7))
         btn.center = center
         btn.setTitle(title, for: .normal)
         btn.setImage(img, for: .normal)
@@ -201,7 +209,7 @@ class TGCameraVC: UIViewController {
             animation.subtype = kCATransitionFromRight
         }
         newInput = try? AVCaptureDeviceInput(device: newDevice)
-        if newInput == nil {
+        guard newInput != nil else{
             return
         }
         
@@ -229,6 +237,7 @@ class TGCameraVC: UIViewController {
     }
 }
 
+@available(iOS 10.0, *)
 extension TGCameraVC: AVCapturePhotoCaptureDelegate {
     func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if error != nil {
@@ -238,7 +247,33 @@ extension TGCameraVC: AVCapturePhotoCaptureDelegate {
                 picData = imageData
                 showImageContainerView?.isHidden = false
                 showImageView?.image = UIImage(data: imageData)
+                if TGPhotoPickerConfig.shared.saveImageToPhotoAlbum{
+                    self.saveImageToPhotoAlbum(UIImage(data: imageData)!)
+                }
             }
+        }
+    }
+    
+    fileprivate func saveImageToPhotoAlbum(_ savedImage:UIImage){
+        UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(imageDidFinishSavingWithErrorContextInfo), nil)
+    }
+    
+    @objc fileprivate func imageDidFinishSavingWithErrorContextInfo(image:UIImage,error:NSError?,contextInfo:UnsafeMutableRawPointer?){
+        if canUseAlbum(){
+            let msg = (error != nil) ? TGPhotoPickerConfig.shared.saveImageFailTip : TGPhotoPickerConfig.shared.saveImageSuccessTip
+            let alert =  UIAlertView(title: TGPhotoPickerConfig.shared.saveImageTip, message: msg, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle)
+            alert.show()
+        }
+    }
+    
+    fileprivate func canUseAlbum()-> Bool{
+        if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
+            let alertView = UIAlertView(title: TGPhotoPickerConfig.shared.PhotoLibraryUsage, message: TGPhotoPickerConfig.shared.PhotoLibraryUsageTip, delegate: nil, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle, otherButtonTitles: TGPhotoPickerConfig.shared.cancelTitle)
+            alertView.tag = TGPhotoPickerConfig.shared.alertViewTag
+            alertView.show()
+            return false
+        }else{
+            return true
         }
     }
 }
