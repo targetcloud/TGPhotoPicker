@@ -8,7 +8,7 @@ the best photo picker plugin in swift(iOS8+)
 ![Build](https://img.shields.io/badge/build-passing-green.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)
 ![Platform](https://img.shields.io/cocoapods/p/Pastel.svg?style=flat)
-![Cocoapod](https://img.shields.io/badge/pod-v0.0.4-blue.svg)
+![Cocoapod](https://img.shields.io/badge/pod-v0.0.5-blue.svg)
 
 ## Demo Screenshot
 
@@ -25,6 +25,7 @@ the best photo picker plugin in swift(iOS8+)
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2584.PNG" width = "60%" />
 
 ## Recently Updated
+- 0.0.5 添加AlertSheet类和useCustomActionSheet配置属性
 - 0.0.4 新增11个属性，向下兼容iOS8，其中最主要的新增功能是2个，1是允许用户选择使用iOS8或iOS10拍照功能，推荐仍使用iOS8，默认使用iOS10;2是拍照时是否同时把拍照结果保存到系统相册中去，默认不保存
 - 0.0.3 丰富的参数，`DIY`你满意的一款photo picker
 
@@ -143,6 +144,9 @@ func upLoadData(){
 
 #### 可以配置的属性（以下为部分可以配置的参数,完整配置参数见TGPhotoPickerConfig.swift（其中官方Demo中列出了主要的26个参数的使用效果））
 ``` swift
+    /** Alert样式*/
+    var useCustomActionSheet: Bool = true
+    
     /** 拍照后是否保存照片到相册*/
     var saveImageToPhotoAlbum: Bool = false
     
@@ -150,163 +154,163 @@ func upLoadData(){
     var useiOS8Camera: Bool = false
     
     /** 与useCustomSmartCollectionsMask结合使用,当useCustomSmartCollectionsMask为true时过滤需要显示smartAlbum的Album类型*/
-    customSmartCollections 
+    var customSmartCollections 
     
     /** 使用自定义的PHAssetCollectionSubtype集合来过滤显示自己想要的相册夹,如想显示慢动作和自拍,那么上面的useCustomSmartCollectionsMask数组中设置为（或添加）
-    useCustomSmartCollectionsMask: Bool = true
+    var useCustomSmartCollectionsMask: Bool = true
     
     /** 是否使用中文名称显示smartAlbum的Album名*/
-    useChineseAlbumName: Bool = false
+    var useChineseAlbumName: Bool = false
     
     /** 空内容的相册夹是否显示 */
-    isShowEmptyAlbum: Bool = false
+    var isShowEmptyAlbum: Bool = false
     
     /** 升序排列照片*/
-    ascending: Bool = false
+    var ascending: Bool = false
     
     /** 预置的成组配置, 微博 微信*/
-    type: TGPhotoPickerType = .normal
+    var type: TGPhotoPickerType = .normal
     
     /** 在选择类型为方 带时用到的Corner*/
-    checkboxCorner: CGFloat = 0
+    var checkboxCorner: CGFloat = 0
     
     /** 选择框显示的位置*/
-    checkboxPosition: TGCheckboxPosition = .topRight
+    var checkboxPosition: TGCheckboxPosition = .topRight
     
     /** 移除按钮显示的位置*/
-    removePosition: TGCheckboxPosition = .topRight
+    var removePosition: TGCheckboxPosition = .topRight
     
     /** 移除类型,同选择类型*/
-    removeType: TGCheckboxType = .diagonalBelt
+    var removeType: TGCheckboxType = .diagonalBelt
     
     /** 是否显示选择顺序*/
-    isShowNumber: Bool = true
+    var isShowNumber: Bool = true
     
     /** 纯数字模式下显示选择顺序时的数字阴影宽,不需要阴影设置为0*/
-    shadowW:CGFloat = 1.0
+    var shadowW:CGFloat = 1.0
     
     /** 纯数字模式下显示选择顺序时的数字阴影高,不需要阴影设置为0*/
-    shadowH:CGFloat = 1.0
+    var shadowH:CGFloat = 1.0
     
     /** 选择框类型（样式） 8种 */
-    checkboxType: TGCheckboxType = .diagonalBelt
+    var checkboxType: TGCheckboxType = .diagonalBelt
     
     /** 显示在工具栏上的选择框的大小*/
-    checkboxBarWH: CGFloat = 30
+    var checkboxBarWH: CGFloat = 30
     
     /** 显示在照片Cell上的选择框的大小*/
-    checkboxCellWH: CGFloat = 20
+    var checkboxCellWH: CGFloat = 20
     
     /** 选择框起始透明度*/
-    checkboxBeginngAlpha: CGFloat = 1
+    var checkboxBeginngAlpha: CGFloat = 1
     
     /** 选择框的结束透明度, 两者用于选择框渐变效果*/
-    checkboxEndingAlpha: CGFloat = 1
+    var checkboxEndingAlpha: CGFloat = 1
     
     /** 选择框的画线宽度, 工具栏上返回、删除按钮的画线宽度*/
-    checkboxLineW: CGFloat = 1.5
+    var checkboxLineW: CGFloat = 1.5
     
     /** 选择框的Padding*/
-    checkboxPadding: CGFloat = 1
+    var checkboxPadding: CGFloat = 1
     
     /** 选择时是否动画效果*/
-    checkboxAnimate: Bool = true
+    var checkboxAnimate: Bool = true
     
     /** 选择时或选择到最大照片数量时，当前或其他Cell的遮罩的透明度*/
-    maskAlpha: CGFloat = 0.6
+    var maskAlpha: CGFloat = 0.6
     
     /** 使用选择遮罩: false,当选择照片数量达到最大值时,其余照片显示遮罩; true,其余照片不显示遮罩,而是已经选择的照片显示遮罩 */
-    useSelectMask: Bool = false
+    var useSelectMask: Bool = false
     
     /** 工具条的高度*/
-    toolBarH: CGFloat = 44.0
+    var toolBarH: CGFloat = 44.0
     
     /** 相册类型列表Cell的高度*/
-    albumCellH: CGFloat = 60.0
+    var albumCellH: CGFloat = 60.0
     
     /** 照片Cell的高宽,即选择时的呈现的宽高*/
-    selectWH: CGFloat = 80
+    var selectWH: CGFloat = 80
     
     /** 控件本身的Cell的宽高,即选择后的呈现的宽高*/
-    mainCellWH: CGFloat = 80
+    var mainCellWH: CGFloat = 80
     
     /** 自动宽高,用于控件本身Cell的宽高自动计算*/
-    autoSelectWH: Bool = false
+    var autoSelectWH: Bool = false
     
     /** true,在选择照片界面,点击照片（非checkbox区域）时,不跳转到大图预览界面,而是直接选择或取消选择当前照片; false, 点击照片checkbox区域选择或取消选择当前照片,点击非checkbox区域跳转到大图预览界面*/
-    immediateTapSelect: Bool = false
+    var immediateTapSelect: Bool = false
     
     /** 控件或Cell之间布局时的padding*/
-    padding: CGFloat = 1
+    var padding: CGFloat = 1
     
     /** 左右没有空白,即选择时呈现的UICollectionView没有contentInset中的左右Inset*/
-    leftAndRigthNoPadding: Bool = true
+    var leftAndRigthNoPadding: Bool = true
     
     /** 选择时呈现的UICollectionView的每行列数*/
-    colCount: CGFloat = 4
+    var colCount: CGFloat = 4
     
     /** 选择后控件本身呈现的UICollectionView的每行列数*/
-    mainColCount: CGFloat = 4
+    var mainColCount: CGFloat = 4
     
     /** 完成按钮标题*/
-    doneTitle = "完成"
+    var doneTitle = "完成"
     
     /** 完成按钮的宽*/
-    doneButtonW: CGFloat = 70
+    var doneButtonW: CGFloat = 70
     
     /** 完成按钮的高*/
-    doneButtonH: CGFloat = 30.8
+    var doneButtonH: CGFloat = 30.8
     
     /** 导航工具栏返回按钮图标显示圆边 及 星（star）样式显示圆边*/
-    isShowBorder: Bool = false
+    var isShowBorder: Bool = false
     
     /** 分多次选择照片时,剩余照片达到上限时的提示文字*/
-    leftTitle = "剩余"
+    var leftTitle = "剩余"
     
     /** 相册类型界面的标题*/
-    albumTitle = "照片"
+    var albumTitle = "照片"
     
     /** 确定按钮的标题*/
-    confirmTitle  = "确定"
+    var confirmTitle  = "确定"
     
     /** 选择数量达到上限时的提示文字, #为占位符*/
-    errorImageMaxSelect = "图片选择最多不能超过#张"
+    var errorImageMaxSelect = "图片选择最多不能超过#张"
     
     /** 拍摄标题*/
-    cameraTitle = "拍摄"
+    var cameraTitle = "拍摄"
     
     /** 选择标题*/
-    selectTitle = "从手机相册选择"
+    var selectTitle = "从手机相册选择"
     
     /** 取消标题*/
-    cancelTitle = "取消"
+    var cancelTitle = "取消"
     
     /** 选择时显示的数字的字体大小等*/
-    fontSize: CGFloat = 15.0
+    var fontSize: CGFloat = 15.0
     
     /** 预览照片的最大宽度*/
-    previewImageFetchMaxW:CGFloat = 600
+    var previewImageFetchMaxW:CGFloat = 600
     
     /** 工具栏的背景色,有透明部分则全屏穿透效果*/
-    barBGColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 0.9)
+    var barBGColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 0.9)
     
     /** 选择框 、按钮的颜色*/
-    tinColor = UIColor(red: 7/255, green: 179/255, blue: 20/255, alpha: 1)
+    var tinColor = UIColor(red: 7/255, green: 179/255, blue: 20/255, alpha: 1)
     
     /** 删除按钮的颜色*/
-    removeHighlightedColor: UIColor = .red
+    var removeHighlightedColor: UIColor = .red
     
     /** 删除按钮是否隐藏*/
-    isRemoveButtonHidden: Bool = false
+    var isRemoveButtonHidden: Bool = false
     
     /** 按钮无效时的文字颜色*/
-    disabledColor: UIColor = .gray
+    var disabledColor: UIColor = .gray
     
     /** 最大照片选择数量上限*/
-    maxImageCount: Int = 9
+    var maxImageCount: Int = 9
     
     /** 压缩比,0(most)..1(least) 越小图片就越小*/
-    compressionQuality: CGFloat = 0.5
+    var compressionQuality: CGFloat = 0.5
 ```
 #### 使用链式编程配置时，请在所有属性前加tg_前缀即可
 
