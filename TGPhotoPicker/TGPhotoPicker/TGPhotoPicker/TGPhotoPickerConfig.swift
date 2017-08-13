@@ -128,6 +128,9 @@ class TGPhotoPickerConfig {
         }
     }
     
+    /** Alert样式*/
+    var useCustomActionSheet: Bool = true
+    
     /** 是否显示选择顺序*/
     var isShowNumber: Bool = true{
         didSet{
@@ -663,6 +666,12 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_isShowBorder(_ show: Bool) -> TGPhotoPickerConfig {
         self.isShowBorder = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_useCustomActionSheet(_ custom: Bool) -> TGPhotoPickerConfig {
+        self.useCustomActionSheet = custom
         return self
     }
     
@@ -1562,5 +1571,12 @@ extension UIColor{
             return 1
         }
         return cmps[3]
+    }
+    
+    class func hexInt(_ hexValue: Int) -> UIColor {
+        return UIColor(red: ((CGFloat)((hexValue & 0xFF0000) >> 16)) / 255.0,
+                       green: ((CGFloat)((hexValue & 0xFF00) >> 8)) / 255.0,
+                       blue: ((CGFloat)(hexValue & 0xFF)) / 255.0,
+                       alpha: 1.0)
     }
 }

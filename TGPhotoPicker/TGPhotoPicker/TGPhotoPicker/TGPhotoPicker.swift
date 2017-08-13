@@ -183,6 +183,12 @@ extension TGPhotoPicker : UICollectionViewDelegate{
     }
     
     private func addPhoto(_ indexPath: IndexPath){
+        if config.useCustomActionSheet{
+            let sheet = TGActionSheet(delegate: self, cancelTitle: config.cancelTitle, otherTitles: [config.cameraTitle, config.selectTitle])
+            sheet.show()
+            return
+        }
+        
         let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let action1 = UIAlertAction(title: config.cameraTitle, style: .default) { (action) in
@@ -191,6 +197,57 @@ extension TGPhotoPicker : UICollectionViewDelegate{
             self.ipc.delegate = self
             self.camera()
             */
+            self.actionSheet(actionSheet: nil, didClickedAt: 0)
+        }
+        
+        let action2 = UIAlertAction(title: config.selectTitle, style: .default) { (action) in
+            self.addPhotos()
+        }
+        
+        ac.addAction(action1)
+        ac.addAction(action2)
+        ac.addAction(UIAlertAction(title: config.cancelTitle, style: .cancel, handler: nil))
+        
+        vc?.present(ac, animated: true, completion: nil)
+    }
+    
+/*
+ //apple
+    private func camera(){
+        self.ipc.sourceType = .camera
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            vc?.present(self.ipc, animated: true, completion:nil)
+        }
+    }
+ */
+    
+    fileprivate func addPhotos(){
+        let pickervc = TGPhotoPickerVC(type: .allAlbum)
+        pickervc.imageSelectDelegate = self
+        pickervc.alreadySelectedImageNum = tgphotos.count
+        vc?.present(pickervc, animated: true, completion: nil)
+    }
+    
+    private func previewPhoto(_ index: Int){
+        let previewvc = TGPhotoPreviewVC()
+        let nav = UINavigationController(rootViewController: previewvc)
+        previewvc.selectImages = tgphotos
+        previewvc.delegate = self
+        previewvc.currentPage = index
+        
+        let animation = CATransition()
+        animation.duration = 0.5
+        animation.subtype = kCATransitionFromRight
+        UIApplication.shared.keyWindow?.layer.add(animation, forKey: nil)
+        
+        vc?.present(nav, animated: false, completion: nil)
+    }
+}
+
+extension TGPhotoPicker: TGActionSheetDelegate {
+    func actionSheet(actionSheet: TGActionSheet?, didClickedAt index: Int) {
+        switch index {
+        case 0:
             if TGPhotoPickerConfig.shared.useiOS8Camera{
                 let cameraVC = TGCameraVCForiOS8()
                 cameraVC.callbackPicutureData = { [weak self] imgData in
@@ -240,49 +297,11 @@ extension TGPhotoPicker : UICollectionViewDelegate{
                 }
                 self.vc?.present(cameraVC, animated: true, completion: nil)
             }
-        }
-        
-        let action2 = UIAlertAction(title: config.selectTitle, style: .default) { (action) in
+        case 1:
             self.addPhotos()
+        default:
+            break
         }
-        
-        ac.addAction(action1)
-        ac.addAction(action2)
-        ac.addAction(UIAlertAction(title: config.cancelTitle, style: .cancel, handler: nil))
-        
-        vc?.present(ac, animated: true, completion: nil)
-    }
-    
-/*
- //apple
-    private func camera(){
-        self.ipc.sourceType = .camera
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            vc?.present(self.ipc, animated: true, completion:nil)
-        }
-    }
- */
-    
-    private func addPhotos(){
-        let pickervc = TGPhotoPickerVC(type: .allAlbum)
-        pickervc.imageSelectDelegate = self
-        pickervc.alreadySelectedImageNum = tgphotos.count
-        vc?.present(pickervc, animated: true, completion: nil)
-    }
-    
-    private func previewPhoto(_ index: Int){
-        let previewvc = TGPhotoPreviewVC()
-        let nav = UINavigationController(rootViewController: previewvc)
-        previewvc.selectImages = tgphotos
-        previewvc.delegate = self
-        previewvc.currentPage = index
-        
-        let animation = CATransition()
-        animation.duration = 0.5
-        animation.subtype = kCATransitionFromRight
-        UIApplication.shared.keyWindow?.layer.add(animation, forKey: nil)
-        
-        vc?.present(nav, animated: false, completion: nil)
     }
 }
 
