@@ -321,6 +321,21 @@ class ViewController: UIViewController {
         saveImageButton.isSelected = TGPhotoPickerConfig.shared.saveImageToPhotoAlbum
         saveImageButton.addTarget(self,action: #selector(saveImageAction(_:)),for: UIControlEvents.touchUpInside)
         self.view.addSubview(saveImageButton)
+        
+        let customSheetButton: UIButton = UIButton(frame: CGRect(x: saveImageButton.frame.maxX, y: TGPhotoPickerConfig.ScreenH-120, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        customSheetButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        customSheetButton.setTitle("customSheet", for: .normal)
+        customSheetButton.setTitleColor(.white, for: .normal)
+        customSheetButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        customSheetButton.backgroundColor = self.view.backgroundColor
+        customSheetButton.isSelected = TGPhotoPickerConfig.shared.useCustomActionSheet
+        customSheetButton.addTarget(self,action: #selector(useCustomActionSheetAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(customSheetButton)
+    }
+    
+    func useCustomActionSheetAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.useCustomActionSheet = sender.isSelected
     }
     
     func saveImageAction(_ sender: UIButton) {
