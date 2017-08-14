@@ -2,7 +2,8 @@
 
 # TGPhotoPicker
 
-the best photo picker plugin in swift(iOS8+)
+the best photo picker plugin in swift(iOS8+) 
+No using picture resources, based on TGImage
 
 ![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 ![Build](https://img.shields.io/badge/build-passing-green.svg)
@@ -30,6 +31,7 @@ the best photo picker plugin in swift(iOS8+)
 - 0.0.3 丰富的参数，`DIY`你满意的一款photo picker
 
 ## Features
+- [x] 不使用图片资源，基于TGImage实现
 - [x] 支持`链式`编程配置，程序员的最爱
 - [x] 支持`Cocoapods`
 - [x] 支持2种`遮罩`模式（直接在选择的照片cell上显示遮罩、选择到最大照片数量后其余照片cell显示遮罩）
