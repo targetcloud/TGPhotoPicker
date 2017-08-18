@@ -139,11 +139,11 @@ class TGPhotoListVC: UITableViewController {
             TGPhotoPickerConfig.shared.customSmartCollections.append(.smartAlbumUserLibrary)
         }
         
-        if #available(iOS 9.0, *) {
-            if !TGPhotoPickerConfig.shared.customSmartCollections.contains(.smartAlbumScreenshots){
-                TGPhotoPickerConfig.shared.customSmartCollections.append(.smartAlbumScreenshots)
-            }
-        }
+//        if #available(iOS 9.0, *) {
+//            if !TGPhotoPickerConfig.shared.customSmartCollections.contains(.smartAlbumScreenshots){
+//                TGPhotoPickerConfig.shared.customSmartCollections.append(.smartAlbumScreenshots)
+//            }
+//        }
         
         PHPhotoLibrary.shared().register(self)
         setupTableView()
@@ -182,6 +182,7 @@ class TGPhotoListVC: UITableViewController {
         }
         
         let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+        print("smartAlbums.count:\(smartAlbums.count)")
         for i in 0 ..< smartAlbums.count  {//14 (contains `Recently Deleted`)
             if TGPhotoPickerConfig.shared.useCustomSmartCollectionsMask{
                 if TGPhotoPickerConfig.shared.customSmartCollections.contains(smartAlbums[i].assetCollectionSubtype){
@@ -205,6 +206,7 @@ class TGPhotoListVC: UITableViewController {
     
     private func filterFetchResult(collection: PHAssetCollection){
         let fetchResult = PHAsset.fetchAssets(in: collection, options: TGPhotoFetchOptions())
+        print("\(String(describing: collection.localizedTitle)):\(fetchResult.count)")
         if TGPhotoPickerConfig.shared.isShowEmptyAlbum{
             self.albums.append(TGFetchM(result: fetchResult as! PHFetchResult<PHObject> , name: collection.localizedTitle, assetType: collection.assetCollectionSubtype))
         }else if fetchResult.count > 0 {

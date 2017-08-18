@@ -86,7 +86,11 @@ class TGCameraVCForiOS8: UIViewController {
         }
     }
     
-    fileprivate func canUseCamera()-> Bool{
+    fileprivate func canUseCamera(returnClosure:@escaping (Bool)->()){
+        TGPhotoPickerManager.shared.authorizePhotoLibrary { (status) in
+            returnClosure(status == .authorized)
+        }
+        /*
         let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if authStatus == .denied{
             let alertView = UIAlertView(title: TGPhotoPickerConfig.shared.cameraUsage, message: TGPhotoPickerConfig.shared.cameraUsageTip, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle, otherButtonTitles: TGPhotoPickerConfig.shared.cancelTitle)
@@ -96,9 +100,14 @@ class TGCameraVCForiOS8: UIViewController {
         }else{
             return true
         }
+        */
     }
     
-    fileprivate func canUseAlbum()-> Bool{
+    fileprivate func canUseAlbum(returnClosure:@escaping (Bool)->()){
+        TGPhotoPickerManager.shared.authorizePhotoLibrary { (status) in
+            returnClosure(status == .authorized)
+        }
+        /*
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
             let alertView = UIAlertView(title: TGPhotoPickerConfig.shared.PhotoLibraryUsage, message: TGPhotoPickerConfig.shared.PhotoLibraryUsageTip, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle, otherButtonTitles: TGPhotoPickerConfig.shared.cancelTitle)
             alertView.tag = TGPhotoPickerConfig.shared.alertViewTag
@@ -107,6 +116,7 @@ class TGCameraVCForiOS8: UIViewController {
         }else{
             return true
         }
+        */
     }
     
     fileprivate lazy var focusView: UIView = {
@@ -120,11 +130,11 @@ class TGCameraVCForiOS8: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if canUseCamera() {
-            setupCamera()
-            setupUI()
-        }else{
-            return
+        canUseCamera { (canUse) in
+            if canUse{
+                self.setupCamera()
+                self.setupUI()
+            }
         }
         
         if #available(iOS 9.0, *) {
@@ -315,14 +325,23 @@ class TGCameraVCForiOS8: UIViewController {
     }
     
     fileprivate func saveImageToPhotoAlbum(_ savedImage:UIImage){
-        UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(imageDidFinishSavingWithErrorContextInfo), nil)
+        canUseAlbum { (canUse) in
+            if canUse{
+                UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(self.imageDidFinishSavingWithErrorContextInfo), nil)
+            }
+        }
     }
     
     @objc fileprivate func imageDidFinishSavingWithErrorContextInfo(image:UIImage,error:NSError?,contextInfo:UnsafeMutableRawPointer?){
-        if canUseAlbum(){
-            let msg = (error != nil) ? TGPhotoPickerConfig.shared.saveImageFailTip : TGPhotoPickerConfig.shared.saveImageSuccessTip
-            let alert =  UIAlertView(title: TGPhotoPickerConfig.shared.saveImageTip, message: msg, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle)
-            alert.show()
+        canUseAlbum { (canUse) in
+            if canUse{
+                let msg = (error != nil) ? (TGPhotoPickerConfig.shared.saveImageFailTip+"("+(error?.localizedDescription)!+")") : TGPhotoPickerConfig.shared.saveImageSuccessTip
+                if !TGPhotoPickerConfig.shared.showCameraSaveSuccess && error == nil{
+                    return
+                }
+                let alert =  UIAlertView(title: TGPhotoPickerConfig.shared.saveImageTip, message: msg, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle)
+                alert.show()
+            }
         }
     }
     
@@ -367,7 +386,7 @@ class TGCameraVCForiOS8: UIViewController {
         device.unlockForConfiguration()
     }
 }
-
+/*
 extension TGCameraVCForiOS8: UIAlertViewDelegate{
     func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if buttonIndex == 0 && alertView.tag == TGPhotoPickerConfig.shared.alertViewTag {
@@ -380,3 +399,4 @@ extension TGCameraVCForiOS8: UIAlertViewDelegate{
         }
     }
 }
+*/

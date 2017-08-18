@@ -41,6 +41,13 @@ enum TGCaptureDeviceType: String{
     case builtInDualCamera = "AVCaptureDeviceTypeBuiltInDualCamera"
 }
 
+enum TGSelectKind: Int{
+    case onlyPhoto
+    case onlyLive
+    case onlyVideo
+    case all
+}
+
 class TGPhotoPickerConfig {
     static let ScreenW = UIScreen.main.bounds.width
     static let ScreenH = UIScreen.main.bounds.height
@@ -322,8 +329,8 @@ class TGPhotoPickerConfig {
     var useiOS8Camera: Bool = false
     
     /** 相册权限*/
-    var PhotoLibraryUsage = "照片权限未开启"
-    var PhotoLibraryUsageTip = "请您到 设置->隐私->照片 开启访问权限"
+    var photoLibraryUsage = "照片权限未开启"
+    var photoLibraryUsageTip = "请您到 设置->隐私->照片 开启访问权限"
     
     /** 选择数量达到上限时的提示文字, #为占位符*/
     var errorImageMaxSelect = "图片选择最多不能超过#张"
@@ -389,6 +396,66 @@ class TGPhotoPickerConfig {
     
     /** 缓存的选择顺序图像,自动生成*/
     var cacheNumerImageArr = [UIImage]()
+    
+    /** 相机在选择照片时显示*/
+    var showCarmeraInSelectPhoto: Bool = false
+    
+    /** 选择类型，照片、Live、视频、全部*/
+    var selectKind: TGSelectKind = .all{
+        didSet{
+            if selectKind == .onlyLive{
+                useCustomSmartCollectionsMask = true
+                isShowEmptyAlbum = false
+                if #available(iOS 10.3, *) {
+                    if !customSmartCollections.contains(.smartAlbumLivePhotos){
+                        customSmartCollections.append(.smartAlbumLivePhotos)
+                    }
+                } 
+            }else if selectKind == .onlyVideo{
+                useCustomSmartCollectionsMask = true
+                isShowEmptyAlbum = false
+                if !customSmartCollections.contains(.smartAlbumVideos){
+                    customSmartCollections.append(.smartAlbumVideos)
+                }
+            }
+        }
+    }
+    
+    /** 显示指示器（0/9）*/
+    var showIndicator: Bool = false
+    
+    /** 显示预览按钮*/
+    var showPreviewBotton: Bool = false
+    
+    /** 预览标题*/
+    var previewBottonTitle: String = "预览"
+    
+    /** 显示编辑按钮*/
+    var showEditButton: Bool = false
+    
+    /** 编辑标题*/
+    var editButtonTitle: String = "编辑"
+    
+    /** 只能选择图像和视频一种，不能同时选择两种类型*/
+    var onlySelectPhotoOrVideo: Bool = false
+    
+    /** 裁剪宽高比*/
+    var cropScale: CGFloat = 0
+    
+    /** 显示原图按钮，显示合计选择的大小*/
+    var showOriginal: Bool = false
+    
+    /** 原图按钮标题*/
+    var originalTitle: String = "原图"
+    
+    /** 显示重置按钮*/
+    var showReselect: Bool = false
+    
+    /** 重置按钮标题*/
+    var reselectTitle: String = "重置"
+    
+    /** 拍照保存成功提示*/
+    var showCameraSaveSuccess: Bool = true
     
     /** 以下为照相配置 8个 */
     /** 按钮分布时边界*/
@@ -694,8 +761,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_PhotoLibraryUsage(_ str: String) -> TGPhotoPickerConfig {
-        self.PhotoLibraryUsage = str
+    public func tg_photoLibraryUsage(_ str: String) -> TGPhotoPickerConfig {
+        self.photoLibraryUsage = str
         return self
     }
     
@@ -718,8 +785,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_PhotoLibraryUsageTip(_ str: String) -> TGPhotoPickerConfig {
-        self.PhotoLibraryUsageTip = str
+    public func tg_photoLibraryUsageTip(_ str: String) -> TGPhotoPickerConfig {
+        self.photoLibraryUsageTip = str
         return self
     }
     
@@ -883,6 +950,90 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_previewPadding(_ padding: CGFloat) -> TGPhotoPickerConfig {
         self.previewPadding = padding
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showCarmeraInSelectPhoto(_ use: Bool) -> TGPhotoPickerConfig {
+        self.useiOS8Camera = use
+        return self
+    }
+    
+    @discardableResult
+    public func tg_selectKind(_ kind: TGSelectKind) -> TGPhotoPickerConfig {
+        self.selectKind = kind
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showIndicator(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showIndicator = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showPreviewBotton(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showPreviewBotton = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_previewBottonTitle(_ str: String) -> TGPhotoPickerConfig {
+        self.previewBottonTitle = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showEditButton(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showEditButton = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_editButtonTitle(_ str: String) -> TGPhotoPickerConfig {
+        self.editButtonTitle = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_onlySelectPhotoOrVideo(_ only: Bool) -> TGPhotoPickerConfig {
+        self.onlySelectPhotoOrVideo = only
+        return self
+    }
+    
+    @discardableResult
+    public func tg_cropScale(_ scale: CGFloat) -> TGPhotoPickerConfig {
+        self.cropScale = scale
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showOriginal(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showOriginal = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_originalTitle(_ str: String) -> TGPhotoPickerConfig {
+        self.originalTitle = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showReselect(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showReselect = show
+        return self
+    }
+    
+    @discardableResult
+    public func tg_reselectTitle(_ str: String) -> TGPhotoPickerConfig {
+        self.reselectTitle = str
+        return self
+    }
+    
+    @discardableResult
+    public func tg_showCameraSaveSuccess(_ show: Bool) -> TGPhotoPickerConfig {
+        self.showCameraSaveSuccess = show
         return self
     }
 
@@ -1549,6 +1700,34 @@ class TGPhotoPickerConfig {
             switch name {
             case "Recently Deleted":
                 return "最近删除"
+            case "All Photos":
+                return "所有照片"
+            case "Camera Roll":
+                return "相机胶卷"
+            case "Favorites":
+                return "收藏"
+            case "Videos":
+                return "视频"
+            case "Recently Added":
+                return "最近添加"
+            case "Selfies":
+                return "自拍"
+            case "Screenshots":
+                return "屏幕快照"
+            case "Panoramas":
+                return "全景照片"
+            case "Slo-mo":
+                return "慢动作"
+            case "Bursts":
+                return "连拍快照"
+            case "Hidden":
+                return "隐藏"
+            case "Time-lapse":
+                return "延时摄影"
+            case "Live Photos":
+                return "生活"
+            case "Depth Effect":
+                return "景深效果"
             default:
                 return name
             }

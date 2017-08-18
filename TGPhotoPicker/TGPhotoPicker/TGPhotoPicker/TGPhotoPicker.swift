@@ -184,7 +184,7 @@ extension TGPhotoPicker : UICollectionViewDelegate{
     
     private func addPhoto(_ indexPath: IndexPath){
         if config.useCustomActionSheet{
-            let sheet = TGActionSheet(delegate: self, cancelTitle: config.cancelTitle, otherTitles: [config.cameraTitle, config.selectTitle])
+            let sheet = TGActionSheet(delegate: self, /*title: "请选择",*/cancelTitle: config.cancelTitle, otherTitles: [config.cameraTitle, config.selectTitle])
             sheet.show()
             return
         }
@@ -201,7 +201,7 @@ extension TGPhotoPicker : UICollectionViewDelegate{
         }
         
         let action2 = UIAlertAction(title: config.selectTitle, style: .default) { (action) in
-            self.addPhotos()
+            self.actionSheet(actionSheet: nil, didClickedAt: 1)//self.addPhotos()
         }
         
         ac.addAction(action1)
@@ -222,10 +222,14 @@ extension TGPhotoPicker : UICollectionViewDelegate{
  */
     
     fileprivate func addPhotos(){
-        let pickervc = TGPhotoPickerVC(type: .allAlbum)
-        pickervc.imageSelectDelegate = self
-        pickervc.alreadySelectedImageNum = tgphotos.count
-        vc?.present(pickervc, animated: true, completion: nil)
+        TGPhotoPickerManager.shared.authorizePhotoLibrary { (status) in
+            if status == .authorized{
+                let pickervc = TGPhotoPickerVC(type: .allAlbum)
+                pickervc.imageSelectDelegate = self
+                pickervc.alreadySelectedImageNum = self.tgphotos.count
+                self.vc?.present(pickervc, animated: true, completion: nil)
+            }
+        }
     }
     
     private func previewPhoto(_ index: Int){

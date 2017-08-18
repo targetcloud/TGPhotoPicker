@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class TGPhotoPickerManager: NSObject {
     static let shared = TGPhotoPickerManager()
@@ -68,63 +69,175 @@ class TGPhotoPickerManager: NSObject {
         ac.addAction(UIAlertAction(title: config.cancelTitle, style: .cancel, handler: nil))
         UIApplication.shared.keyWindow?.currentVC()?.present(ac, animated: true, completion: nil)
     }
+    
+    func authorizePhotoLibrary(authorizeClosure:@escaping (PHAuthorizationStatus)->()){
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        if status == .authorized{
+            authorizeClosure(status)
+        } else if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (state) in
+                DispatchQueue.main.async(execute: {
+                    authorizeClosure(state)
+                })
+            })
+        } else {
+            let sheet = TGActionSheet(delegate: self, title: config.photoLibraryUsage + "("+config.photoLibraryUsageTip+")",cancelTitle: config.cancelTitle, otherTitles: [config.confirmTitle])
+            sheet.name = "photoLibraryAuthorize"
+            sheet.show()
+            authorizeClosure(status)
+        }
+    }
+    
+    func authorizeCamera(authorizeClosure:@escaping (AVAuthorizationStatus)->()){
+        let status = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        
+        if status == .authorized{
+            authorizeClosure(status)
+        } else if status == .notDetermined {
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted) in
+                if granted {
+                    authorizeClosure(.authorized)
+                }
+            })
+        } else {
+            let sheet = TGActionSheet(delegate: self, title: config.cameraUsage + "("+config.cameraUsageTip+")",cancelTitle: config.cancelTitle, otherTitles: [config.confirmTitle])
+            sheet.name = "cameraAuthorize"
+            sheet.show()
+            authorizeClosure(status)
+        }
+    }
+    
+    public static func convertAssetArrToImageArr(assetArr:Array<PHAsset>,scale:CGFloat = TGPhotoPickerConfig.shared.compressionQuality) -> [UIImage] {
+        var imageArr = [UIImage]()
+        for item in assetArr {
+            if item.mediaType == .image {
+                getAssetOrigin(asset: item, dealImageSuccess: { (img, info) in
+                    guard img != nil else{ return }
+                    if let zipImageData = UIImageJPEGRepresentation(img!,scale){
+                        let image = UIImage(data: zipImageData)
+                        imageArr.append(image!)
+                    }
+                })
+            }
+        }
+        return imageArr
+    }
+    
+    public static func convertAssetArrToAVPlayerItemArr(assetArr:Array<PHAsset>) -> [AVPlayerItem] {
+        var videoArr = [AVPlayerItem]()
+        for item in assetArr {
+            if item.mediaType == .video {
+                let videoRequestOptions = PHVideoRequestOptions()
+                videoRequestOptions.deliveryMode = .automatic
+                videoRequestOptions.version = .current
+                videoRequestOptions.isNetworkAccessAllowed = true
+                PHImageManager.default().requestPlayerItem(forVideo: item, options: videoRequestOptions) { (playItem, info) in
+                    if playItem != nil {
+                        videoArr.append(playItem!)
+                    }
+                }
+            }
+        }
+        return videoArr
+    }
+    
+    static func getAssetOrigin(asset:PHAsset,dealImageSuccess:@escaping (UIImage?,[AnyHashable:Any]?) -> ()) {
+        let option = PHImageRequestOptions()
+        option.isSynchronous = true
+        PHImageManager.default().requestImage(for: asset, targetSize:PHImageManagerMaximumSize, contentMode: .aspectFit, options: option) { (originImage, info) in
+            dealImageSuccess(originImage,info)
+        }
+    }
+    
+    deinit {
+        //print("TGPhotoPickerManager deinit")
+    }
 }
 
 extension TGPhotoPickerManager: TGActionSheetDelegate {
     func actionSheet(actionSheet: TGActionSheet?, didClickedAt index: Int) {
-        switch index {
-        case 0:
-            if TGPhotoPickerConfig.shared.useiOS8Camera {
-                let cameraVC = TGCameraVCForiOS8()
-                cameraVC.callbackPicutureData = { imgData in
-                    let bigImg = UIImage(data:imgData!)
-                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
-                    let smallImg = bigImg
-                    let model = TGPhotoM()
-                    model.bigImage = bigImg
-                    model.imageData = imgData
-                    model.smallImage = smallImg
-                    self.handlePhotoModelsBlock?([model])
-                    self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
+        switch actionSheet?.name ?? "" {
+        case "photoLibraryAuthorize","cameraAuthorize":
+            switch index {
+            case 0:
+                let url = URL(string: UIApplicationOpenSettingsURLString)
+                if let url = url, UIApplication.shared.canOpenURL(url) {
+                    if #available(iOS 10, *) {
+                        if UIApplication.shared.canOpenURL(url){
+                            UIApplication.shared.open(url, options: [:],completionHandler: {(success) in
+                                
+                            })
+                        }
+                    } else {
+                        if UIApplication.shared.canOpenURL(url){
+                            UIApplication.shared.openURL(url)
+                        }
+                    }
                 }
-                UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
-            } else if #available(iOS 10.0, *) {
-                let cameraVC = TGCameraVC()
-                cameraVC.callbackPicutureData = { imgData in
-                    let bigImg = UIImage(data:imgData!)
-                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
-                    let smallImg = bigImg
-                    let model = TGPhotoM()
-                    model.bigImage = bigImg
-                    model.imageData = imgData
-                    model.smallImage = smallImg
-                    self.handlePhotoModelsBlock?([model])
-                    self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
-                }
-                UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
-            } else {
-                let cameraVC = TGCameraVCForiOS8()
-                cameraVC.callbackPicutureData = { imgData in
-                    let bigImg = UIImage(data:imgData!)
-                    let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
-                    let smallImg = bigImg
-                    let model = TGPhotoM()
-                    model.bigImage = bigImg
-                    model.imageData = imgData
-                    model.smallImage = smallImg
-                    self.handlePhotoModelsBlock?([model])
-                    self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
-                }
-                UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
+            default:
+                break
             }
-        case 1:
-            let pickervc = TGPhotoPickerVC(type: .allAlbum)
-            pickervc.callbackPhotos = handlePhotosBlock
-            pickervc.callbackPhotoMs = handlePhotoModelsBlock
-            UIApplication.shared.keyWindow?.currentVC()?.present(pickervc, animated: true, completion: nil)
         default:
-            break
+            switch index {
+            case 0:
+                if TGPhotoPickerConfig.shared.useiOS8Camera {
+                    let cameraVC = TGCameraVCForiOS8()
+                    cameraVC.callbackPicutureData = { imgData in
+                        let bigImg = UIImage(data:imgData!)
+                        let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                        let smallImg = bigImg
+                        let model = TGPhotoM()
+                        model.bigImage = bigImg
+                        model.imageData = imgData
+                        model.smallImage = smallImg
+                        self.handlePhotoModelsBlock?([model])
+                        self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
+                    }
+                    UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
+                } else if #available(iOS 10.0, *) {
+                    let cameraVC = TGCameraVC()
+                    cameraVC.callbackPicutureData = { imgData in
+                        let bigImg = UIImage(data:imgData!)
+                        let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                        let smallImg = bigImg
+                        let model = TGPhotoM()
+                        model.bigImage = bigImg
+                        model.imageData = imgData
+                        model.smallImage = smallImg
+                        self.handlePhotoModelsBlock?([model])
+                        self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
+                    }
+                    UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
+                } else {
+                    let cameraVC = TGCameraVCForiOS8()
+                    cameraVC.callbackPicutureData = { imgData in
+                        let bigImg = UIImage(data:imgData!)
+                        let imgData = UIImageJPEGRepresentation(bigImg!,TGPhotoPickerConfig.shared.compressionQuality)
+                        let smallImg = bigImg
+                        let model = TGPhotoM()
+                        model.bigImage = bigImg
+                        model.imageData = imgData
+                        model.smallImage = smallImg
+                        self.handlePhotoModelsBlock?([model])
+                        self.handlePhotosBlock?([nil],[smallImg],[bigImg],[imgData])
+                    }
+                    UIApplication.shared.keyWindow?.currentVC()?.present(cameraVC, animated: true, completion: nil)
+                }
+            case 1:
+                authorizePhotoLibrary(authorizeClosure: { (status) in
+                    if status == .authorized{                        
+                        let pickervc = TGPhotoPickerVC(type: .allAlbum)
+                        pickervc.callbackPhotos = self.handlePhotosBlock
+                        pickervc.callbackPhotoMs = self.handlePhotoModelsBlock
+                        UIApplication.shared.keyWindow?.currentVC()?.present(pickervc, animated: true, completion: nil)
+                    }
+                })
+            default:
+                break
+            }
         }
+        
     }
 }
 

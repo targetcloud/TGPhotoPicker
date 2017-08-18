@@ -19,6 +19,8 @@ protocol TGActionSheetDelegate: NSObjectProtocol {
 class TGActionSheet: UIView {
     weak var delegate: TGActionSheetDelegate?
     
+    var name:String?
+    
     fileprivate lazy var btnArr: [UIButton] = [UIButton]()
     
     fileprivate lazy var dividerArr: [UIView] = [UIView]()
@@ -32,7 +34,7 @@ class TGActionSheet: UIView {
     
     fileprivate lazy var actionSheet: UIView = {
         let actionSheet = UIView()
-        actionSheet.backgroundColor = .clear
+        actionSheet.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         return actionSheet
     }()
     
@@ -47,15 +49,15 @@ class TGActionSheet: UIView {
         return cancelBtn
     }()
     
-    class func showActionSheet(with delegate: TGActionSheetDelegate?,  cancelTitle: String, otherTitles: [String]) -> TGActionSheet {
-        return TGActionSheet(delegate: delegate, cancelTitle: cancelTitle, otherTitles: otherTitles)
+    class func showActionSheet(with delegate: TGActionSheetDelegate?, title: String? = nil, cancelTitle: String, otherTitles: [String]) -> TGActionSheet {
+        return TGActionSheet(delegate: delegate, title: title,cancelTitle: cancelTitle, otherTitles: otherTitles)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    init(delegate: TGActionSheetDelegate?, cancelTitle: String, otherTitles: [String]) {
+    init(delegate: TGActionSheetDelegate?, title: String? = nil,cancelTitle: String, otherTitles: [String]) {
         super.init(frame: CGRect.zero)
         btnArr.removeAll()
         dividerArr.removeAll()
@@ -63,6 +65,9 @@ class TGActionSheet: UIView {
         self.delegate = delegate
         self.addSubview(coverView)
         self.coverView.addSubview(actionSheet)
+        if (title?.characters.count ?? 0) > 0{
+            self.createBtn(with: title!, bgColor: UIColor(white: 1, alpha: 1), titleColor: .lightGray, tagIndex: 0)
+        }
         for i in 0..<otherTitles.count {
             self.createBtn(with: otherTitles[i], bgColor: UIColor(white: 1, alpha: 1), titleColor: .darkGray, tagIndex: i + TGActionSheetBaseTag)
         }
@@ -77,7 +82,7 @@ class TGActionSheet: UIView {
     fileprivate func createBtn(with title: String?, bgColor: UIColor?, titleColor: UIColor?, tagIndex: Int) {
         let actionBtn = UIButton(type: .custom)
         actionBtn.tag = tagIndex
-        actionBtn.titleLabel?.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize)
+        actionBtn.titleLabel?.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize + (tagIndex == 0 ? -3 : 0))
         actionBtn.backgroundColor = bgColor
         actionBtn.titleLabel?.textAlignment = .center
         actionBtn.setTitle(title, for: .normal)
@@ -97,7 +102,7 @@ class TGActionSheet: UIView {
     }
     
     @objc fileprivate func actionSheetClicked(_ btn: UIButton) {
-        if btn.tag != TGActionSheetCancelTag {
+        if btn.tag != TGActionSheetCancelTag && btn.tag >= TGActionSheetBaseTag{
             self.delegate?.actionSheet(actionSheet: self, didClickedAt: btn.tag - TGActionSheetBaseTag)
             self.dismiss()
         } else {

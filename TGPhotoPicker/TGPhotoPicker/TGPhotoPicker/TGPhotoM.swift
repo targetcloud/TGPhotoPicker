@@ -13,8 +13,20 @@ class TGPhotoM: NSObject {
     var smallImage: UIImage?
     var bigImage: UIImage?
     var imageData: Data?
-    var asset: PHAsset?
+    var asset: PHAsset?{
+        didSet{
+            if self.asset?.mediaType == .video{
+                if self.asset?.duration == nil{
+                    self.videoLength = ""
+                }else{
+                    self.videoLength = TGPhotoM.getNewTimeFromDuration(duration: (self.asset?.duration)!)
+                }
+            }
+        }
+    }
     var order: Int = 0
+    
+    var videoLength: String?
     
     convenience init(asset: PHAsset) {
         self.init()
@@ -96,4 +108,26 @@ class TGPhotoM: NSObject {
             })
         }
     }
+    
+    static func getNewTimeFromDuration(duration:Double) -> String{
+        var newTimer = ""
+        if duration < 10 {
+            newTimer = String(format: "0:0%d", arguments: [Int(duration)])
+            return newTimer
+        } else if duration < 60 && duration >= 10 {
+            newTimer = String(format: "0:%.0f", arguments: [duration])
+            return newTimer
+        } else {
+            let min = Int(duration/60)
+            let sec = Int(duration - (Double(min)*60))
+            if sec < 10 {
+                newTimer = String(format: "%d:0%d", arguments: [min ,sec])
+                return newTimer
+            } else {
+                newTimer = String(format: "%d:%d", arguments: [min ,sec])
+                return newTimer
+            }
+        }
+    }
+
 }

@@ -10,21 +10,21 @@ import UIKit
 
 class ViewController: UIViewController {
     //创建方式1
-    //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200))
+    //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180))
     
     //创建方式2 带配置
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { (config) in
 //        config.type = .weibo
 //    }
 
     //创建方式3 带配置(链式)
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { (config) in
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { (config) in
 //        config.tg_type(.wechat)
 //              .tg_checkboxLineW(1)
 //    }
 
     //创建方式4 带配置（单例配置对象）
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 200)) { _ in
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { _ in
         TGPhotoPickerConfig.shared.tg_type(.wechat)
             .tg_checkboxLineW(1)
             .tg_toolBarH(50)
@@ -74,9 +74,23 @@ class ViewController: UIViewController {
             self.view.addSubview(button)
         }
         
+        (TGSelectKind.onlyPhoto.rawValue ... TGSelectKind.all.rawValue).forEach {
+            let x = $0 % cols * cellWidth
+            let y = $0 / cols * cellHeight
+            let frame = CGRect(x: x, y: y+230, width: cellWidth, height: cellHeight)
+            let button: UIButton = UIButton(frame: frame)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            button.tag = 3000+$0
+            button.setTitle(" \(TGSelectKind(rawValue: $0)!)", for: .normal)
+            button.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+            button.addTarget(self,action: #selector(selectKind(_:)),for: UIControlEvents.touchUpInside)
+            self.view.addSubview(button)
+        }
+        
         let currentCheckboxType = TGPhotoPickerConfig.shared.type.rawValue>0 ? TGCheckboxType.circle : TGCheckboxType(rawValue: 4)!
         (self.view.viewWithTag(1000+currentCheckboxType.rawValue) as! UIButton).isSelected = true
         (self.view.viewWithTag(2000+1) as! UIButton).isSelected = true
+        (self.view.viewWithTag(3000+3) as! UIButton).isSelected = true
         TGPhotoPickerConfig.shared.checkboxType = currentCheckboxType
         TGPhotoPickerConfig.shared.checkboxPosition = TGCheckboxPosition(rawValue: 1)!
         
@@ -458,6 +472,14 @@ class ViewController: UIViewController {
         TGPhotoPickerConfig.shared.removeType = TGCheckboxType(rawValue: sender.tag-1000)!
         for i in 0...TGCheckboxType.star.rawValue{
             (self.view.viewWithTag(1000+i) as! UIButton).isSelected = false
+        }
+        sender.isSelected = true
+    }
+    
+    func selectKind(_ sender: UIButton) {
+        TGPhotoPickerConfig.shared.selectKind = TGSelectKind(rawValue: sender.tag-3000)!
+        for i in 0...TGSelectKind.all.rawValue{
+            (self.view.viewWithTag(3000+i) as! UIButton).isSelected = false
         }
         sender.isSelected = true
     }

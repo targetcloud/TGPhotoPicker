@@ -28,9 +28,13 @@ class TGCameraVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupCamera()
-        setupUI()
+        
+        TGPhotoPickerManager.shared.authorizeCamera { (status) in
+            if status == .authorized{
+                self.setupCamera()
+                self.setupUI()
+            }
+        }
         
         if #available(iOS 9.0, *) {
             let isVCBased = Bundle.main.infoDictionary?["UIViewControllerBasedStatusBarAppearance"] as? Bool ?? false
@@ -255,18 +259,31 @@ extension TGCameraVC: AVCapturePhotoCaptureDelegate {
     }
     
     fileprivate func saveImageToPhotoAlbum(_ savedImage:UIImage){
-        UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(imageDidFinishSavingWithErrorContextInfo), nil)
-    }
-    
-    @objc fileprivate func imageDidFinishSavingWithErrorContextInfo(image:UIImage,error:NSError?,contextInfo:UnsafeMutableRawPointer?){
-        if canUseAlbum(){
-            let msg = (error != nil) ? TGPhotoPickerConfig.shared.saveImageFailTip : TGPhotoPickerConfig.shared.saveImageSuccessTip
-            let alert =  UIAlertView(title: TGPhotoPickerConfig.shared.saveImageTip, message: msg, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle)
-            alert.show()
+        canUseAlbum { (canUse) in
+            if canUse{
+                UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(self.imageDidFinishSavingWithErrorContextInfo), nil)
+            }
         }
     }
     
-    fileprivate func canUseAlbum()-> Bool{
+    @objc fileprivate func imageDidFinishSavingWithErrorContextInfo(image:UIImage,error:NSError?,contextInfo:UnsafeMutableRawPointer?){
+        canUseAlbum { (canUse) in
+            if canUse{
+                let msg = (error != nil) ? (TGPhotoPickerConfig.shared.saveImageFailTip+"("+(error?.localizedDescription)!+")") : TGPhotoPickerConfig.shared.saveImageSuccessTip
+                if !TGPhotoPickerConfig.shared.showCameraSaveSuccess && error == nil{
+                    return
+                }
+                let alert =  UIAlertView(title: TGPhotoPickerConfig.shared.saveImageTip, message: msg, delegate: self, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle)
+                alert.show()
+            }
+        }
+    }
+    
+    fileprivate func canUseAlbum(returnClosure:@escaping (Bool)-> ()){
+        TGPhotoPickerManager.shared.authorizePhotoLibrary { (status) in
+            returnClosure(status == .authorized)
+        }
+        /*
         if PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.authorized {
             let alertView = UIAlertView(title: TGPhotoPickerConfig.shared.PhotoLibraryUsage, message: TGPhotoPickerConfig.shared.PhotoLibraryUsageTip, delegate: nil, cancelButtonTitle: TGPhotoPickerConfig.shared.confirmTitle, otherButtonTitles: TGPhotoPickerConfig.shared.cancelTitle)
             alertView.tag = TGPhotoPickerConfig.shared.alertViewTag
@@ -275,6 +292,7 @@ extension TGCameraVC: AVCapturePhotoCaptureDelegate {
         }else{
             return true
         }
+        */
     }
 }
 
