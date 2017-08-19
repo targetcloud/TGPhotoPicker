@@ -12,7 +12,7 @@ import Photos
 private let reuseIdentifier = "TGPhotoCell"
 
 protocol TGPhotoCollectionViewCellDelegate: class {
-    func selectNumberChange(number: Int,isRemove: Bool)
+    func selectNumberChange(number: Int,isRemove: Bool,forceRefresh: Bool)
 }
 
 class TGPhotoCell: UICollectionViewCell {
@@ -75,7 +75,7 @@ class TGPhotoCell: UICollectionViewCell {
             if vc != nil {
                 selectMaskV.isHidden = true
                 nav?.assetArr.remove(at: (nav?.assetArr.index(of: self.model!))!)
-                self.delegate?.selectNumberChange(number: (nav?.assetArr.count)!,isRemove: true)
+                self.delegate?.selectNumberChange(number: (nav?.assetArr.count)!,isRemove: true, forceRefresh: false)
             }
         } else {
             if vc != nil {
@@ -98,7 +98,7 @@ class TGPhotoCell: UICollectionViewCell {
                             self.selectBtn.transform = CGAffineTransform.identity
                         }, completion: nil)
                     }
-                    self.delegate?.selectNumberChange(number: (nav?.assetArr.count)!,isRemove: false)
+                    self.delegate?.selectNumberChange(number: (nav?.assetArr.count)!,isRemove: false, forceRefresh: false)
                 }
             }
         }
@@ -366,6 +366,23 @@ extension TGPhotoCollectionVC: TGBottomBarDelegate{
     func onDoneButtonClicked(){
         self.nav.imageSelectFinish()
     }
+    
+    func onOriginalButtonClicked(_ sender:TGAnimationButton){
+        sender.isSelected = !sender.isSelected
+    }
+    
+    func onPreviewButtonClicked(_ sender:TGAnimationButton){
+        let previewvc = TGAlbumPhotoPreviewVC()
+        previewvc.fetchResult = self.fetchResult
+        previewvc.currentPage = (self.fetchResult?.index(of: nav.assetArr[0]))!
+        previewvc.delegate = self
+        self.navigationController?.show(previewvc, sender: nil)
+    }
+    
+    func onReselectButtonClicked(_ sender:TGAnimationButton){
+        nav.assetArr.removeAll()
+        selectNumberChange(number: (nav.assetArr.count),forceRefresh: true)
+    }
 }
 
 extension TGPhotoCollectionVC: TGPhotoCollectionDelegate{
@@ -406,8 +423,9 @@ extension TGPhotoCollectionVC: PHPhotoLibraryChangeObserver{
 }
 
 extension TGPhotoCollectionVC: TGPhotoCollectionViewCellDelegate{
-    func selectNumberChange(number: Int,isRemove: Bool = false) {
-        if (isRemove && TGPhotoPickerConfig.shared.isShowNumber) ||//是删除并显示数字的情况
+    func selectNumberChange(number: Int,isRemove: Bool = false,forceRefresh: Bool = false) {
+        if forceRefresh ||
+            (isRemove && TGPhotoPickerConfig.shared.isShowNumber) ||//是删除并显示数字的情况
             (!TGPhotoPickerConfig.shared.useSelectMask &&//不是反向显示遮罩的情况下并且
                                                           (number == TGPhotoPickerConfig.shared.maxImageCount ||//选择已经达到最多张数
                                                            (isRemove && (self.nav.assetArr.count == TGPhotoPickerConfig.shared.maxImageCount - 1))//最多张减1需要去掉反向显示的所有遮罩

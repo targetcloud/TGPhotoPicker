@@ -80,6 +80,10 @@ class TGBottomBar: UIView {
         setupUI()
     }
     
+    func canEdit(_ can: Bool){
+        editButton.isEnabled = can
+    }
+    
     private func setupUI(){
         self.backgroundColor = TGPhotoPickerConfig.shared.barBGColor
         
@@ -131,6 +135,8 @@ class TGBottomBar: UIView {
     }
     
     func changeNumber(number:Int,animation:Bool){
+        self.previewButton.isEnabled = number > 0
+        self.reselectButton.isEnabled = number > 0
         self.doneButton?.isEnabled = number > 0
         self.doneNumberContainer?.isHidden = true
         
@@ -156,6 +162,7 @@ class TGBottomBar: UIView {
     
     private lazy var previewButton: TGAnimationButton = {
         let previewBtn = TGAnimationButton(frame: CGRect(x: 0, y: (self.height - TGPhotoPickerConfig.shared.doneButtonH * 0.9) / 2, width: 0, height: TGPhotoPickerConfig.shared.doneButtonH * 0.9))
+        previewBtn.animationKind = .none
         previewBtn.setTitle(TGPhotoPickerConfig.shared.previewBottonTitle, for: .normal)
         previewBtn.titleLabel?.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize-1)
         previewBtn.cornerRadius = TGPhotoPickerConfig.shared.doneButtonH * 0.1
@@ -176,6 +183,7 @@ class TGBottomBar: UIView {
     
     private lazy var reselectButton: TGAnimationButton = {
         let reselectBtn = TGAnimationButton(frame: CGRect(x: 0, y: (self.height - TGPhotoPickerConfig.shared.doneButtonH * 0.9) / 2, width: 0, height: TGPhotoPickerConfig.shared.doneButtonH * 0.9))
+        reselectBtn.animationKind = .none
         reselectBtn.setTitle(TGPhotoPickerConfig.shared.reselectTitle, for: .normal)
         reselectBtn.titleLabel?.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize-1)
         reselectBtn.cornerRadius = TGPhotoPickerConfig.shared.doneButtonH * 0.1
@@ -232,6 +240,7 @@ class TGBottomBar: UIView {
     
     private lazy var editButton: TGAnimationButton = {
         let editBtn = TGAnimationButton(frame: CGRect(x: padding, y: (self.height - TGPhotoPickerConfig.shared.doneButtonH * 0.9) / 2, width: 0, height: TGPhotoPickerConfig.shared.doneButtonH * 0.9))
+        editBtn.animationKind = .none
         editBtn.setTitle(TGPhotoPickerConfig.shared.editButtonTitle, for: .normal)
         editBtn.titleLabel?.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize-1)
         editBtn.cornerRadius = TGPhotoPickerConfig.shared.doneButtonH * 0.1

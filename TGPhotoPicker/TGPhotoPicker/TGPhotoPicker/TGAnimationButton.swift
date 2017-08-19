@@ -9,6 +9,7 @@
 import UIKit
 
 enum TGAnimationButtonKind {
+    case none
     case topToBottom
     case bottomToTop
     case leftToRight
@@ -45,6 +46,7 @@ class TGAnimationButton: UIButton {
     
     public override var isEnabled: Bool {
         didSet {
+            guard animationKind != .none else { return }
             if oldValue != isEnabled {
                 if oldValue {
                     lastDisabledTitle = title(for: .disabled)

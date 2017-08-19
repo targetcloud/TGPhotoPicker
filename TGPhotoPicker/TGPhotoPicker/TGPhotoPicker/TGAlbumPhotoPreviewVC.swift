@@ -82,8 +82,10 @@ class TGAlbumPhotoPreviewVC: UIViewController {
     fileprivate func changeCurrentToolbar(){
         if let _ = nav.assetArr.index(of: self.fetchResult![self.currentPage]){
             self.topBar!.setSelect(true)
+            self.bottomBar?.canEdit(true)
         } else {
             self.topBar!.setSelect(false)
+            self.bottomBar?.canEdit(false)
         }
     }
     
@@ -109,6 +111,10 @@ extension TGAlbumPhotoPreviewVC: TGBottomBarDelegate{
     func onDoneButtonClicked() {
         self.nav.imageSelectFinish()
     }
+    
+    func onEditButtonClicked(_ sender:TGAnimationButton){
+        
+    }
 }
 
 extension TGAlbumPhotoPreviewVC: TGTopBarDelegate{
@@ -125,6 +131,7 @@ extension TGAlbumPhotoPreviewVC: TGTopBarDelegate{
                 self.nav.assetArr.remove(at: index)
             }
         }
+        self.bottomBar?.canEdit(select)
         self.bottomBar?.changeNumber(number: self.nav.assetArr.count, animation: TGPhotoPickerConfig.shared.checkboxAnimate)
     }
 }
