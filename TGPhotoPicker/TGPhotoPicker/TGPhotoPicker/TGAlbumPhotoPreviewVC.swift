@@ -101,6 +101,7 @@ class TGAlbumPhotoPreviewVC: UIViewController {
         
         self.view.addSubview(topBar!)
         self.view.addSubview(bottomBar!)
+        bottomBar?.host = "\(type(of: self))"
     }
 }
 

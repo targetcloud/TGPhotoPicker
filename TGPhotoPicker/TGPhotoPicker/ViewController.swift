@@ -345,6 +345,66 @@ class ViewController: UIViewController {
         customSheetButton.isSelected = TGPhotoPickerConfig.shared.useCustomActionSheet
         customSheetButton.addTarget(self,action: #selector(useCustomActionSheetAction(_:)),for: UIControlEvents.touchUpInside)
         self.view.addSubview(customSheetButton)
+        
+        let editButton: UIButton = UIButton(frame: CGRect(x: customSheetButton.frame.maxX, y: TGPhotoPickerConfig.ScreenH-120, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        editButton.setTitle("showEdit", for: .normal)
+        editButton.setTitleColor(.white, for: .normal)
+        editButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        editButton.backgroundColor = self.view.backgroundColor
+        editButton.isSelected = TGPhotoPickerConfig.shared.isShowEditButton
+        editButton.addTarget(self,action: #selector(showEditAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(editButton)
+        
+        let previewButton: UIButton = UIButton(frame: CGRect(x: 0, y: TGPhotoPickerConfig.ScreenH-140, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        previewButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        previewButton.setTitle("showPreview", for: .normal)
+        previewButton.setTitleColor(.white, for: .normal)
+        previewButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        previewButton.backgroundColor = self.view.backgroundColor
+        previewButton.isSelected = TGPhotoPickerConfig.shared.isShowPreviewButton
+        previewButton.addTarget(self,action: #selector(showPreviewAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(previewButton)
+        
+        let reselectButton: UIButton = UIButton(frame: CGRect(x: previewButton.frame.maxX, y: TGPhotoPickerConfig.ScreenH-140, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        reselectButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        reselectButton.setTitle("showReselect", for: .normal)
+        reselectButton.setTitleColor(.white, for: .normal)
+        reselectButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        reselectButton.backgroundColor = self.view.backgroundColor
+        reselectButton.isSelected = TGPhotoPickerConfig.shared.isShowReselect
+        reselectButton.addTarget(self,action: #selector(showReselectAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(reselectButton)
+        
+        let originalButton: UIButton = UIButton(frame: CGRect(x: reselectButton.frame.maxX, y: TGPhotoPickerConfig.ScreenH-140, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        originalButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        originalButton.setTitle("showOriginal", for: .normal)
+        originalButton.setTitleColor(.white, for: .normal)
+        originalButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        originalButton.backgroundColor = self.view.backgroundColor
+        originalButton.isSelected = TGPhotoPickerConfig.shared.isShowOriginal
+        originalButton.addTarget(self,action: #selector(showOriginalAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(originalButton)
+    }
+    
+    func showPreviewAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.isShowPreviewButton = sender.isSelected
+    }
+    
+    func showReselectAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.isShowReselect = sender.isSelected
+    }
+    
+    func showOriginalAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.isShowOriginal = sender.isSelected
+    }
+    
+    func showEditAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.isShowEditButton = sender.isSelected
     }
     
     func useCustomActionSheetAction(_ sender: UIButton) {

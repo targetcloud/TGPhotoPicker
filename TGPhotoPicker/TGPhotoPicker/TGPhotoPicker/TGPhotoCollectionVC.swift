@@ -264,6 +264,7 @@ class TGPhotoCollectionVC: UICollectionViewController {
         self.collectionView?.backgroundColor = .white
         self.collectionView?.register(TGPhotoCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.view.addSubview(self.bottomBar)
+        bottomBar.host = "\(type(of: self))"
     }
     
     fileprivate func resetCacheAssets() {

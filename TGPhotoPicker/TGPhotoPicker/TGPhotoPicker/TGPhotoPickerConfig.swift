@@ -276,11 +276,18 @@ class TGPhotoPickerConfig {
         }
     }
     
+    /** 动画时长*/
+    var animateDuration: TimeInterval = 0.5{
+        didSet{
+            animateDuration = animateDuration>2 ? 2 :(animateDuration<0.1 ? 0.1 :animateDuration)
+        }
+    }
+    
     /** 左右没有空白,即选择时呈现的UICollectionView没有contentInset中的左右Inset*/
     var leftAndRigthNoPadding: Bool = true
     
     /** 选择时呈现的UICollectionView的每行列数*/
-    var colCount: CGFloat = 4{
+    var colCount: CGFloat = 5{
         didSet{
             colCount = colCount < 3 ? 3 : (colCount > 4 ? 4 : colCount)
         }
@@ -422,16 +429,16 @@ class TGPhotoPickerConfig {
     }
     
     /** 显示指示器（0/9）*/
-    var showIndicator: Bool = false
+    var isShowIndicator: Bool = false
     
     /** 显示预览按钮*/
-    var showPreviewBotton: Bool = false
+    var isShowPreviewButton: Bool = false
     
     /** 预览标题*/
     var previewBottonTitle: String = "预览"
     
     /** 显示编辑按钮*/
-    var showEditButton: Bool = false
+    var isShowEditButton: Bool = false
     
     /** 编辑标题*/
     var editButtonTitle: String = "编辑"
@@ -443,13 +450,13 @@ class TGPhotoPickerConfig {
     var cropScale: CGFloat = 0
     
     /** 显示原图按钮，显示合计选择的大小*/
-    var showOriginal: Bool = false
+    var isShowOriginal: Bool = false
     
     /** 原图按钮标题*/
     var originalTitle: String = "原图"
     
     /** 显示重置按钮*/
-    var showReselect: Bool = false
+    var isShowReselect: Bool = false
     
     /** 重置按钮标题*/
     var reselectTitle: String = "重置"
@@ -536,6 +543,12 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_customSmartCollections(_ custom: [PHAssetCollectionSubtype]) -> TGPhotoPickerConfig {
         self.customSmartCollections = custom
+        return self
+    }
+    
+    @discardableResult
+    public func tg_animateDuration(_ duration: TimeInterval)-> TGPhotoPickerConfig {
+        self.animateDuration = duration
         return self
     }
     
@@ -966,14 +979,14 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_showIndicator(_ show: Bool) -> TGPhotoPickerConfig {
-        self.showIndicator = show
+    public func tg_isShowIndicator(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowIndicator = show
         return self
     }
     
     @discardableResult
-    public func tg_showPreviewBotton(_ show: Bool) -> TGPhotoPickerConfig {
-        self.showPreviewBotton = show
+    public func tg_isShowPreviewButton(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowPreviewButton = show
         return self
     }
     
@@ -984,8 +997,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_showEditButton(_ show: Bool) -> TGPhotoPickerConfig {
-        self.showEditButton = show
+    public func tg_isShowEditButton(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowEditButton = show
         return self
     }
     
@@ -1008,8 +1021,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_showOriginal(_ show: Bool) -> TGPhotoPickerConfig {
-        self.showOriginal = show
+    public func tg_isShowOriginal(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowOriginal = show
         return self
     }
     
@@ -1020,8 +1033,8 @@ class TGPhotoPickerConfig {
     }
     
     @discardableResult
-    public func tg_showReselect(_ show: Bool) -> TGPhotoPickerConfig {
-        self.showReselect = show
+    public func tg_isShowReselect(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowReselect = show
         return self
     }
     
@@ -1759,3 +1772,175 @@ extension UIColor{
                        alpha: 1.0)
     }
 }
+
+extension UIView {
+    func clipRectCorner(direction: UIRectCorner, cornerRadius: CGFloat) {
+        let cornerSize = CGSize(width: cornerRadius, height: cornerRadius)
+        let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: direction, cornerRadii: cornerSize)
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.cgPath
+        layer.addSublayer(maskLayer)
+        layer.mask = maskLayer
+    }
+    
+    public var x: CGFloat{
+        get{
+            return self.frame.origin.x
+        }
+        set{
+            var r = self.frame
+            r.origin.x = newValue
+            self.frame = r
+        }
+    }
+    
+    public var left: CGFloat{
+        get{
+            return self.frame.origin.x
+        }
+        set{
+            var r = self.frame
+            r.origin.x = newValue
+            self.frame = r
+        }
+    }
+    
+    public var y: CGFloat{
+        get{
+            return self.frame.origin.y
+        }
+        set{
+            var r = self.frame
+            r.origin.y = newValue
+            self.frame = r
+        }
+    }
+    
+    public var rightX: CGFloat{
+        get{
+            return self.x + self.width
+        }
+        set{
+            var r = self.frame
+            r.origin.x = newValue - frame.size.width
+            self.frame = r
+        }
+    }
+    
+    public var right: CGFloat{
+        get{
+            return self.x + self.width
+        }
+        set{
+            var r = self.frame
+            r.origin.x = newValue - frame.size.width
+            self.frame = r
+        }
+    }
+    
+    public var bottomY: CGFloat{
+        get{
+            return self.y + self.height
+        }
+        set{
+            var r = self.frame
+            r.origin.y = newValue - frame.size.height
+            self.frame = r
+        }
+    }
+    
+    public var bottom: CGFloat{
+        get{
+            return self.y + self.height
+        }
+        set{
+            var r = self.frame
+            r.origin.y = newValue - frame.size.height
+            self.frame = r
+        }
+    }
+    
+    public var centerX : CGFloat{
+        get{
+            return self.center.x
+        }
+        set{
+            self.center = CGPoint(x: newValue, y: self.center.y)
+        }
+    }
+    
+    public var centerY : CGFloat{
+        get{
+            return self.center.y
+        }
+        set{
+            self.center = CGPoint(x: self.center.x, y: newValue)
+        }
+    }
+    
+    public var width: CGFloat{
+        get{
+            return self.frame.size.width
+        }
+        set{
+            var r = self.frame
+            r.size.width = newValue
+            self.frame = r
+        }
+    }
+    
+    public var w: CGFloat{
+        get{
+            return self.frame.size.width
+        }
+        set{
+            var r = self.frame
+            r.size.width = newValue
+            self.frame = r
+        }
+    }
+    
+    public var height: CGFloat{
+        get{
+            return self.frame.size.height
+        }
+        set{
+            var r = self.frame
+            r.size.height = newValue
+            self.frame = r
+        }
+    }
+    
+    public var h: CGFloat{
+        get{
+            return self.frame.size.height
+        }
+        set{
+            var r = self.frame
+            r.size.height = newValue
+            self.frame = r
+        }
+    }
+    
+    public var origin: CGPoint{
+        get{
+            return self.frame.origin
+        }
+        set{
+            self.x = newValue.x
+            self.y = newValue.y
+        }
+    }
+    
+    public var size: CGSize{
+        get{
+            return self.frame.size
+        }
+        set{
+            self.width = newValue.width
+            self.height = newValue.height
+        }
+    }
+}
+
