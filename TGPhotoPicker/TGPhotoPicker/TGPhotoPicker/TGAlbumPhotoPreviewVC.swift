@@ -62,7 +62,7 @@ class TGAlbumPhotoPreviewVC: UIViewController {
             indicatorLabel = (bottomBar?.indicatorLabel)!
             self.view.addSubview(indicatorLabel!)
             indicatorLabel?.isHidden = false
-            indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)!)
+            indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)! - (indicatorLabel?.h)!)
         }
     }
 
@@ -88,8 +88,8 @@ class TGAlbumPhotoPreviewVC: UIViewController {
     }
 
     fileprivate func changeCurrentToolbar(){
-        if let _ = nav.assetArr.index(of: self.fetchResult![self.currentPage]){
-            self.topBar!.setSelect(true)
+        if let order = nav.assetArr.index(of: self.fetchResult![self.currentPage]){
+            self.topBar!.setSelect(true,TGPhotoPickerConfig.shared.isShowNumber ? order : -1)
             self.bottomBar?.canEdit(true)
         } else {
             self.topBar!.setSelect(false)

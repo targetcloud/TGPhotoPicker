@@ -445,7 +445,7 @@ class TGPhotoPickerConfig {
     var indicatorColor: UIColor = .clear//.lightGray
     
     /** 指示器在预览界面的显示位置*/
-    var indicatorPosition: TGIndicatorPosition = .top//.inBottomBar
+    var indicatorPosition: TGIndicatorPosition = .bottom//.top//.inBottomBar
     
     /** 显示预览按钮*/
     var isShowPreviewButton: Bool = false
