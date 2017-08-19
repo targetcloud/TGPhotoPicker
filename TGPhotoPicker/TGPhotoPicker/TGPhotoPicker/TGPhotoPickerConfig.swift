@@ -48,6 +48,12 @@ enum TGSelectKind: Int{
     case all
 }
 
+enum TGIndicatorPosition: Int{
+    case top
+    case bottom
+    case inBottomBar
+}
+
 class TGPhotoPickerConfig {
     static let ScreenW = UIScreen.main.bounds.width
     static let ScreenH = UIScreen.main.bounds.height
@@ -307,7 +313,11 @@ class TGPhotoPickerConfig {
     var doneButtonW: CGFloat = 70
     
     /** 完成按钮的高*/
-    var doneButtonH: CGFloat = 30.8
+    var doneButtonH: CGFloat = 30.8{
+        didSet{
+            doneButtonH = (doneButtonH > toolBarH * 0.96) ? toolBarH * 0.96 : (doneButtonH < toolBarH * 0.5 ? toolBarH * 0.5 : doneButtonH)
+        }
+    }
     
     /** 导航工具栏返回按钮图标显示圆边 及 星（star）样式显示圆边*/
     var isShowBorder: Bool = false
@@ -430,6 +440,12 @@ class TGPhotoPickerConfig {
     
     /** 显示指示器（0/9）*/
     var isShowIndicator: Bool = false
+    
+    /** 指示器背景色*/
+    var indicatorColor: UIColor = .clear//.lightGray
+    
+    /** 指示器在预览界面的显示位置*/
+    var indicatorPosition: TGIndicatorPosition = .top//.inBottomBar
     
     /** 显示预览按钮*/
     var isShowPreviewButton: Bool = false
@@ -878,6 +894,12 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_disabledColor(_ color: UIColor) -> TGPhotoPickerConfig {
         self.disabledColor = color
+        return self
+    }
+    
+    @discardableResult
+    public func tg_indicatorColor(_ color: UIColor) -> TGPhotoPickerConfig {
+        self.indicatorColor = color
         return self
     }
     

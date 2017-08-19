@@ -24,6 +24,7 @@ class TGAlbumPhotoPreviewVC: UIViewController {
     fileprivate var isAnimation = false
     fileprivate var topBar: TGTopBar?
     fileprivate var bottomBar: TGBottomBar?
+    fileprivate var indicatorLabel: UILabel?
     
     fileprivate lazy var nav: TGPhotoPickerVC = self.navigationController as! TGPhotoPickerVC
     
@@ -56,6 +57,13 @@ class TGAlbumPhotoPreviewVC: UIViewController {
         self.view.backgroundColor = .white
         self.cv.reloadData()
         setupBar()
+        
+        if TGPhotoPickerConfig.shared.isShowIndicator && (TGPhotoPickerConfig.shared.indicatorPosition != .inBottomBar){
+            indicatorLabel = (bottomBar?.indicatorLabel)!
+            self.view.addSubview(indicatorLabel!)
+            indicatorLabel?.isHidden = false
+            indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)!)
+        }
     }
 
     override var prefersStatusBarHidden: Bool{
@@ -161,6 +169,12 @@ extension TGAlbumPhotoPreviewVC: TGPhotoPreviewCellDelegate{
                 var originPoint = self.bottomBar!.frame.origin
                 originPoint.y = originPoint.y - self.bottomBar!.frame.height
                 self.bottomBar!.frame.origin = originPoint
+                if TGPhotoPickerConfig.shared.indicatorPosition == .top{
+                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)!
+                }
+                if TGPhotoPickerConfig.shared.indicatorPosition == .bottom{
+                    self.indicatorLabel?.bottom = (self.bottomBar?.y)!
+                }
             }, completion: { isFinished in
                 if isFinished {
                     self.isAnimation = false
@@ -172,6 +186,12 @@ extension TGAlbumPhotoPreviewVC: TGPhotoPreviewCellDelegate{
                 var originPoint = self.bottomBar!.frame.origin
                 originPoint.y = originPoint.y + self.bottomBar!.frame.height
                 self.bottomBar!.frame.origin = originPoint
+                if TGPhotoPickerConfig.shared.indicatorPosition == .top{
+                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)!
+                }
+                if TGPhotoPickerConfig.shared.indicatorPosition == .bottom{
+                    self.indicatorLabel?.bottom = (self.bottomBar?.y)!
+                }
             }, completion: { isFinished in
                 if isFinished {
                     self.isAnimation = false

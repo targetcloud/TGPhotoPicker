@@ -385,6 +385,21 @@ class ViewController: UIViewController {
         originalButton.isSelected = TGPhotoPickerConfig.shared.isShowOriginal
         originalButton.addTarget(self,action: #selector(showOriginalAction(_:)),for: UIControlEvents.touchUpInside)
         self.view.addSubview(originalButton)
+        
+        let indicatorButton: UIButton = UIButton(frame: CGRect(x: 0, y: TGPhotoPickerConfig.ScreenH-160, width: TGPhotoPickerConfig.ScreenW/3, height: 20))
+        indicatorButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        indicatorButton.setTitle("showIndicator", for: .normal)
+        indicatorButton.setTitleColor(.white, for: .normal)
+        indicatorButton.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+        indicatorButton.backgroundColor = self.view.backgroundColor
+        indicatorButton.isSelected = TGPhotoPickerConfig.shared.isShowIndicator
+        indicatorButton.addTarget(self,action: #selector(showIndicatorAction(_:)),for: UIControlEvents.touchUpInside)
+        self.view.addSubview(indicatorButton)
+    }
+    
+    func showIndicatorAction(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        TGPhotoPickerConfig.shared.isShowIndicator = sender.isSelected
     }
     
     func showPreviewAction(_ sender: UIButton) {

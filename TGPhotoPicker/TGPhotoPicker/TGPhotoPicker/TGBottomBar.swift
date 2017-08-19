@@ -55,9 +55,19 @@ class TGBottomBar: UIView {
                         }
                     }
                 }
+                if TGPhotoPickerConfig.shared.isShowIndicator {
+                    self.addSubview(indicatorLabel)
+                    indicatorLabel.isHidden = false
+                    indicatorLabel.x = (prevBtn?.rightX ?? 0) + ( (doneButton?.left ?? self.w) - (prevBtn?.rightX ?? 0) - indicatorLabel.w) / 2
+                }
             }else if  host == ("\(type(of: TGAlbumPhotoPreviewVC.self))" as NSString).components(separatedBy: ".").first!{
                 if TGPhotoPickerConfig.shared.isShowEditButton{
                     self.addSubview(editButton)
+                }
+                if TGPhotoPickerConfig.shared.isShowIndicator && (TGPhotoPickerConfig.shared.indicatorPosition == .inBottomBar){
+                    self.addSubview(indicatorLabel)
+                    indicatorLabel.isHidden = false
+                    indicatorLabel.x = (TGPhotoPickerConfig.shared.isShowEditButton ? editButton.rightX : 0) + ( (doneButton?.left ?? self.w) - (TGPhotoPickerConfig.shared.isShowEditButton ? editButton.rightX : 0) - indicatorLabel.w) / 2
                 }
             }
         }
@@ -155,10 +165,47 @@ class TGBottomBar: UIView {
             self.doneNumberContainer?.isHidden = true
         }
         */
-        
-        let addStr = number > 0 ? "("+String(number)+")" : ""
-        self.doneButton!.setTitle(TGPhotoPickerConfig.shared.doneTitle + addStr, for: .normal)
+
+        if TGPhotoPickerConfig.shared.isShowIndicator{
+            let attributeString = NSMutableAttributedString(string:"\(number) / \(TGPhotoPickerConfig.shared.maxImageCount)")
+            attributeString.addAttribute(NSFontAttributeName,
+                                         value: UIFont.boldSystemFont(ofSize: TGPhotoPickerConfig.shared.fontSize+3),
+                                         range: NSMakeRange(0,"\(number) ".characters.count))
+            
+            attributeString.addAttribute(NSFontAttributeName,
+                                         value: UIFont.boldSystemFont(ofSize: TGPhotoPickerConfig.shared.fontSize),
+                                         range: NSMakeRange("\(number) ".characters.count,1))
+            
+            attributeString.addAttribute(NSFontAttributeName,
+                                         value: UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize-3),
+                                         range: NSMakeRange("\(number) / ".characters.count,"\(TGPhotoPickerConfig.shared.maxImageCount)".characters.count))
+            indicatorLabel.attributedText = attributeString
+        }else{
+            let addStr = number > 0 ? "("+String(number)+")" : ""
+            self.doneButton!.setTitle(TGPhotoPickerConfig.shared.doneTitle + addStr, for: .normal)
+        }
     }
+    
+    //没有加private,因为可能并不显示在工具条里
+    lazy var indicatorLabel: UILabel = {
+        let indicatorLbl = UILabel(frame: CGRect(x: 0, y: (self.height - TGPhotoPickerConfig.shared.toolBarH * 0.8) / 2, width: 0, height: TGPhotoPickerConfig.shared.toolBarH * 0.8))
+        indicatorLbl.isHidden = true
+        indicatorLbl.text = "0 / \(TGPhotoPickerConfig.shared.maxImageCount)"
+        indicatorLbl.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize+1)
+        indicatorLbl.layer.cornerRadius = TGPhotoPickerConfig.shared.doneButtonH * 0.15
+        indicatorLbl.clipsToBounds = true
+        indicatorLbl.textColor = .white
+        indicatorLbl.textAlignment = .center
+        indicatorLbl.backgroundColor = TGPhotoPickerConfig.shared.indicatorColor
+//        if TGPhotoPickerConfig.shared.isShowBorder {
+//            indicatorLbl.layer.borderWidth = TGPhotoPickerConfig.shared.checkboxLineW
+//            indicatorLbl.layer.borderColor = TGPhotoPickerConfig.shared.tinColor.cgColor
+//        }
+        indicatorLbl.sizeToFit()
+        indicatorLbl.h = TGPhotoPickerConfig.shared.toolBarH * 0.8
+        indicatorLbl.w = indicatorLbl.w < TGPhotoPickerConfig.shared.doneButtonW * 0.8 ? TGPhotoPickerConfig.shared.doneButtonW * 0.8 : indicatorLbl.w
+        return indicatorLbl
+    }()
     
     private lazy var previewButton: TGAnimationButton = {
         let previewBtn = TGAnimationButton(frame: CGRect(x: 0, y: (self.height - TGPhotoPickerConfig.shared.doneButtonH * 0.9) / 2, width: 0, height: TGPhotoPickerConfig.shared.doneButtonH * 0.9))

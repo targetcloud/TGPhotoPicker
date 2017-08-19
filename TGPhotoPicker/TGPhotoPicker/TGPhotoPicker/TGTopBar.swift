@@ -33,7 +33,7 @@ class TGTopBar: UIView {
         setupUI()
     }
     
-    func setSelect(_ select:Bool){
+    func setSelect(_ select:Bool,_ showOrder: Int = 0){
         self.checkboxSelect!.isHidden = !select
         self.checkbox!.isSelected = select
     }
