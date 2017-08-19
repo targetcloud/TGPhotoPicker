@@ -121,7 +121,9 @@ class TGTopBar: UIView {
                 })
             }
             self.delegate?.onSelectedClicked(select: true)
-            checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageArr[(nav?.assetArr.count)! - 1]
+            if TGPhotoPickerConfig.shared.isShowNumber{
+                checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageArr[(nav?.assetArr.count)! - 1]
+            }
         }
     }
     
