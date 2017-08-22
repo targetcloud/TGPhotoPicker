@@ -101,6 +101,7 @@ class TGPhotoPickerConfig {
                 self.immediateTapSelect = false
                 self.removeType = .circle
             case .weibo:
+                self.immediateTapSelect = true
                 self.tinColor = .orange
                 self.checkboxType = .circle
                 self.autoSelectWH = true

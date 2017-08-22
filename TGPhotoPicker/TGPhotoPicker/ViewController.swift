@@ -10,26 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
     //创建方式1
-    //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180))
+    //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160))
     
     //创建方式2 带配置
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { (config) in
-//        config.type = .weibo
-//    }
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { (config) in
+        config.type = .weibo
+    }
 
     //创建方式3 带配置(链式)
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { (config) in
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { (config) in
 //        config.tg_type(.wechat)
 //              .tg_checkboxLineW(1)
 //    }
 
     //创建方式4 带配置（单例配置对象）
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { _ in
-        TGPhotoPickerConfig.shared.tg_type(.wechat)
-            .tg_checkboxLineW(1)
-            .tg_toolBarH(50)
-            .tg_useChineseAlbumName(true)
-    }
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { _ in
+//        TGPhotoPickerConfig.shared.tg_type(.wechat)
+//            .tg_checkboxLineW(1)
+//            .tg_toolBarH(50)
+//            .tg_useChineseAlbumName(true)
+//    }
     
     //以下所有代码请读者忽略（以下代码为演示各参数效果而写）
     override func viewDidLoad() {
