@@ -60,9 +60,15 @@ class TGAlbumPhotoPreviewVC: UIViewController {
         
         if TGPhotoPickerConfig.shared.isShowIndicator && (TGPhotoPickerConfig.shared.indicatorPosition != .inBottomBar){
             indicatorLabel = (bottomBar?.indicatorLabel)!
-            self.view.addSubview(indicatorLabel!)
+            switch TGPhotoPickerConfig.shared.indicatorPosition {
+            case .top,.bottom:
+                self.view.addSubview(indicatorLabel!)
+                indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)! - (indicatorLabel?.h)!)
+            default:
+                self.topBar?.addSubview(indicatorLabel!)
+                indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: ((topBar?.h)! - (indicatorLabel?.h)!)/2)
+            }
             indicatorLabel?.isHidden = false
-            indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)! - (indicatorLabel?.h)!)
         }
     }
 

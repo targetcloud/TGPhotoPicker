@@ -52,6 +52,7 @@ enum TGIndicatorPosition: Int{
     case top
     case bottom
     case inBottomBar
+    case inTopBar
 }
 
 class TGPhotoPickerConfig {

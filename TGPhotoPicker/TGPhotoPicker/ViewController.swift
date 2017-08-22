@@ -24,13 +24,14 @@ class ViewController: UIViewController {
 //    }
 
     //创建方式4 带配置（单例配置对象）
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 180)) { _ in
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { _ in
         TGPhotoPickerConfig.shared.tg_type(.wechat)
             .tg_checkboxLineW(1)
             .tg_toolBarH(50)
             .tg_useChineseAlbumName(true)
     }
     
+    //以下所有代码请读者忽略（以下代码为演示各参数效果而写）
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 28/255, green: 23/255, blue: 42/255, alpha: 1) 
@@ -59,12 +60,17 @@ class ViewController: UIViewController {
         
         cols = 4
         rows = 1
-        cellWidth = Int(self.view.frame.width / CGFloat(cols))
+        cellWidth = Int((self.view.frame.width - 50) / CGFloat(cols))
         cellHeight = 20
+        let positionLabel = UILabel(frame: CGRect(x: 10, y: 230, width: 100, height: 20))
+        positionLabel.text = "position"
+        positionLabel.textColor = .white
+        positionLabel.font = UIFont.systemFont(ofSize: 12)
+        self.view.addSubview(positionLabel)
         (TGCheckboxPosition.topLeft.rawValue ... TGCheckboxPosition.bottomRight.rawValue).forEach {
             let x = $0 % cols * cellWidth
             let y = $0 / cols * cellHeight
-            let frame = CGRect(x: x, y: y+250, width: cellWidth, height: cellHeight)
+            let frame = CGRect(x: x+50, y: y+230, width: cellWidth, height: cellHeight)
             let button: UIButton = UIButton(frame: frame)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
             button.tag = 2000+$0
@@ -74,10 +80,15 @@ class ViewController: UIViewController {
             self.view.addSubview(button)
         }
         
+        let selectKindLabel = UILabel(frame: CGRect(x: 10, y: 210, width: 100, height: 20))
+        selectKindLabel.text = "kind"
+        selectKindLabel.textColor = .white
+        selectKindLabel.font = UIFont.systemFont(ofSize: 12)
+        self.view.addSubview(selectKindLabel)
         (TGSelectKind.onlyPhoto.rawValue ... TGSelectKind.all.rawValue).forEach {
             let x = $0 % cols * cellWidth
             let y = $0 / cols * cellHeight
-            let frame = CGRect(x: x, y: y+230, width: cellWidth, height: cellHeight)
+            let frame = CGRect(x: x+50, y: y+210, width: cellWidth, height: cellHeight)
             let button: UIButton = UIButton(frame: frame)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
             button.tag = 3000+$0
@@ -87,10 +98,29 @@ class ViewController: UIViewController {
             self.view.addSubview(button)
         }
         
+        let indicatorLabel = UILabel(frame: CGRect(x: 10, y: 250, width: 100, height: 20))
+        indicatorLabel.text = "indicator"
+        indicatorLabel.textColor = .white
+        indicatorLabel.font = UIFont.systemFont(ofSize: 12)
+        self.view.addSubview(indicatorLabel)
+        (TGIndicatorPosition.top.rawValue ... TGIndicatorPosition.inTopBar.rawValue).forEach {
+            let x = $0 % cols * cellWidth
+            let y = $0 / cols * cellHeight
+            let frame = CGRect(x: x+50, y: y+250, width: cellWidth, height: cellHeight)
+            let button: UIButton = UIButton(frame: frame)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            button.tag = 4000+$0
+            button.setTitle(" \(TGIndicatorPosition(rawValue: $0)!)", for: .normal)
+            button.setTitleColor(TGPhotoPickerConfig.shared.tinColor, for: .selected)
+            button.addTarget(self,action: #selector(indicatorPosition(_:)),for: UIControlEvents.touchUpInside)
+            self.view.addSubview(button)
+        }
+        
         let currentCheckboxType = TGPhotoPickerConfig.shared.type.rawValue>0 ? TGCheckboxType.circle : TGCheckboxType(rawValue: 4)!
         (self.view.viewWithTag(1000+currentCheckboxType.rawValue) as! UIButton).isSelected = true
         (self.view.viewWithTag(2000+1) as! UIButton).isSelected = true
         (self.view.viewWithTag(3000+3) as! UIButton).isSelected = true
+        (self.view.viewWithTag(4000+1) as! UIButton).isSelected = true
         TGPhotoPickerConfig.shared.checkboxType = currentCheckboxType
         TGPhotoPickerConfig.shared.checkboxPosition = TGCheckboxPosition(rawValue: 1)!
         
@@ -547,6 +577,14 @@ class ViewController: UIViewController {
         TGPhotoPickerConfig.shared.removeType = TGCheckboxType(rawValue: sender.tag-1000)!
         for i in 0...TGCheckboxType.star.rawValue{
             (self.view.viewWithTag(1000+i) as! UIButton).isSelected = false
+        }
+        sender.isSelected = true
+    }
+    
+    func indicatorPosition(_ sender: UIButton) {
+        TGPhotoPickerConfig.shared.indicatorPosition = TGIndicatorPosition(rawValue: sender.tag-4000)!
+        for i in 0...TGIndicatorPosition.inTopBar.rawValue{
+            (self.view.viewWithTag(4000+i) as! UIButton).isSelected = false
         }
         sender.isSelected = true
     }
