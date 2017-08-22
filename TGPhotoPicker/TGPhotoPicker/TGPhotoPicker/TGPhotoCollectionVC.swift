@@ -107,7 +107,7 @@ class TGPhotoCell: UICollectionViewCell {
     private func getCacheImage(_ index: Int) -> UIImage?{
         if TGPhotoPickerConfig.shared.cacheNumerImageArr.count > 0 &&
             index >= 0 &&
-            index <= TGPhotoPickerConfig.shared.cacheNumerImageArr.count{
+            index < TGPhotoPickerConfig.shared.cacheNumerImageArr.count{
             return TGPhotoPickerConfig.shared.cacheNumerImageArr[index]
         }
         return nil
@@ -397,24 +397,8 @@ extension TGPhotoCollectionVC: PHPhotoLibraryChangeObserver{
         if let collectionChanges = changeInstance.changeDetails(for: fetchResult!) {
             DispatchQueue.main.async {
                 self.fetchResult = collectionChanges.fetchResultAfterChanges
-                let collectionView = self.collectionView!
-                if !(collectionChanges.hasIncrementalChanges || collectionChanges.hasMoves) {
-                    collectionView.reloadData()
-                } else {
-                    collectionView.performBatchUpdates({
-                        if let removed = collectionChanges.removedIndexes , removed.count > 0 {
-                                collectionView.deleteItems(at: removed.map { IndexPath(item: $0, section:0) })
-                        }
-                        if let inserted = collectionChanges.insertedIndexes , inserted.count > 0 {
-                                collectionView.insertItems(at: inserted.map { IndexPath(item: $0, section:0) })
-                        }
-                        if let changed = collectionChanges.changedIndexes , changed.count > 0 {
-                                collectionView.reloadItems(at: changed.map { IndexPath(item: $0, section:0) })
-                        }
-                        collectionChanges.enumerateMoves { fromIndex, toIndex in
-                                collectionView.moveItem(at: IndexPath(item: fromIndex, section: 0),to: IndexPath(item: toIndex, section: 0))
-                        }
-                    }, completion: nil)
+                if (collectionChanges.hasIncrementalChanges || collectionChanges.hasMoves) {
+                    self.collectionView?.reloadData()
                 }
                 self.resetCacheAssets()
             }
@@ -426,7 +410,7 @@ extension TGPhotoCollectionVC: TGPhotoCollectionViewCellDelegate{
     func selectNumberChange(number: Int,isRemove: Bool = false,forceRefresh: Bool = false) {
         if forceRefresh ||
             (isRemove && TGPhotoPickerConfig.shared.isShowNumber) ||//是删除并显示数字的情况
-            (!TGPhotoPickerConfig.shared.useSelectMask &&//不是反向显示遮罩的情况下并且
+            (!TGPhotoPickerConfig.shared.useSelectMask &&//反向显示遮罩的情况下并且
                                                           (number == TGPhotoPickerConfig.shared.maxImageCount ||//选择已经达到最多张数
                                                            (isRemove && (self.nav.assetArr.count == TGPhotoPickerConfig.shared.maxImageCount - 1))//最多张减1需要去掉反向显示的所有遮罩
                                                           )

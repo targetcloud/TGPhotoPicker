@@ -246,6 +246,16 @@ class TGPhotoPickerConfig {
         }
     }
     
+    /** 预览UICollectionViewController的高度*/
+    var previewCVH: CGFloat = 100{
+        didSet{
+            previewCVH = previewCVH < 80 ? 80 : (previewCVH > 160 ? 160 : previewCVH)
+        }
+    }
+    
+    /** 显示预览UICollectionViewController*/
+    var isShowPreviewCV: Bool = true
+    
     /** 相册类型列表Cell的高度*/
     var albumCellH: CGFloat = 60.0{
         didSet{
@@ -589,6 +599,18 @@ class TGPhotoPickerConfig {
     @discardableResult
     public func tg_ascending(_ ascending: Bool) -> TGPhotoPickerConfig {
         self.ascending = ascending
+        return self
+    }
+    
+    @discardableResult
+    public func tg_previewCVH(_ h: CGFloat) -> TGPhotoPickerConfig {
+        self.previewCVH = h
+        return self
+    }
+    
+    @discardableResult
+    public func tg_isShowPreviewCV(_ show: Bool) -> TGPhotoPickerConfig {
+        self.isShowPreviewCV = show
         return self
     }
     

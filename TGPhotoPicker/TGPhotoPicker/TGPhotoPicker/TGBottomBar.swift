@@ -61,6 +61,10 @@ class TGBottomBar: UIView {
                     indicatorLabel.x = (prevBtn?.rightX ?? 0) + ( (doneButton?.left ?? self.w) - (prevBtn?.rightX ?? 0) - indicatorLabel.w) / 2
                 }
             }else if  host == ("\(type(of: TGAlbumPhotoPreviewVC.self))" as NSString).components(separatedBy: ".").first!{
+                //加previewCVH
+                if TGPhotoPickerConfig.shared.isShowPreviewCV {
+                    
+                }
                 if TGPhotoPickerConfig.shared.isShowEditButton{
                     self.addSubview(editButton)
                 }
@@ -74,6 +78,7 @@ class TGBottomBar: UIView {
     }
     var showDividerLine: Bool = false
     weak var delegate: TGBottomBarDelegate?
+    weak var nav: TGPhotoPickerVC?
     
     fileprivate var doneNumberAnimationLayer: UIView?
     fileprivate var numLabel: UILabel?

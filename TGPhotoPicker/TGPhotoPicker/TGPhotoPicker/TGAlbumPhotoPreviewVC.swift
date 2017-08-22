@@ -111,6 +111,7 @@ class TGAlbumPhotoPreviewVC: UIViewController {
         
         self.view.addSubview(topBar!)
         self.view.addSubview(bottomBar!)
+        bottomBar?.nav = nav
         bottomBar?.host = "\(type(of: self))"
     }
 }
