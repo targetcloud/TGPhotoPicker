@@ -15,11 +15,11 @@ No using picture resources, based on TGImage
 
 ###### 照片选择界面（.weibo）更多效果在下面哦:）
 
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2574.PNG" width = "60%" />
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2642.PNG" width = "60%" />
 
 ###### 参数调节界面
 
-<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2575.PNG" width = "60%" />
+<img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2641.PNG" width = "60%" />
 
 ###### 自定义拍照界面
 
@@ -144,7 +144,7 @@ func upLoadData(){
     }
 ```
 
-#### 可以配置的属性（以下为部分可以配置的参数,完整配置参数见TGPhotoPickerConfig.swift（其中官方Demo中列出了主要的26个参数的使用效果））
+#### 可以配置的属性（以下为部分可以配置的参数,完整配置参数见TGPhotoPickerConfig.swift（其中官方Demo中列出了主要的32个参数的使用效果））
 ``` swift
     /** Alert样式*/
     var useCustomActionSheet: Bool = true
