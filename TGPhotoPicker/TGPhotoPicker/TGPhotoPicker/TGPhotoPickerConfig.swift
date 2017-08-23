@@ -244,7 +244,7 @@ class TGPhotoPickerConfig {
     /** 工具条的高度*/
     var toolBarH: CGFloat = 44.0{
         didSet{
-            toolBarH = toolBarH < 40 ? 40 : (toolBarH > 114 ? 114 : toolBarH)
+            toolBarH = toolBarH < 36 ? 36 : (toolBarH > 44 ? 44 : toolBarH)
         }
     }
     

@@ -25,6 +25,9 @@ class TGPhotoPreviewVC: UIViewController {
     fileprivate var isStatusBarHidden = false{
         didSet{
             self.setNeedsStatusBarAppearanceUpdate()
+            if TGPhotoPickerConfig.shared.indicatorPosition == .top {
+                indicatorLabel.y = (isStatusBarHidden ? 0 : 64) + 5
+            }
         }
     }
     
@@ -143,11 +146,57 @@ class TGPhotoPreviewVC: UIViewController {
         self.cv!.contentSize = CGSize(width: self.view.bounds.width * CGFloat(self.selectImages.count), height: self.view.bounds.height)
         self.cv!.register(TGPhotoPreviewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         self.view.addSubview(self.cv!)
+        
+        switch TGPhotoPickerConfig.shared.indicatorPosition {
+        case .inTopBar:
+            self.navigationItem.titleView = indicatorLabel
+        case .top:
+            self.view.addSubview(indicatorLabel)
+            indicatorLabel.x = (TGPhotoPickerConfig.ScreenW - indicatorLabel.w) / 2
+            indicatorLabel.y = 64 + 5
+        case .bottom,.inBottomBar:
+            self.view.addSubview(indicatorLabel)
+            indicatorLabel.x = (TGPhotoPickerConfig.ScreenW - indicatorLabel.w) / 2
+            indicatorLabel.y = self.view.h - indicatorLabel.h - 5
+        }
     }
     
     fileprivate func updatePageTitle(){
-        self.title =  String(self.currentPage+1) + "/" + String(self.selectImages.count)
+        //self.title =  String(self.currentPage+1) + "/" + String(self.selectImages.count)
+        let attributeString = NSMutableAttributedString(string:"\(self.currentPage+1) / \(self.selectImages.count)")
+        attributeString.addAttribute(NSFontAttributeName,
+                                     value: UIFont.boldSystemFont(ofSize: TGPhotoPickerConfig.shared.fontSize+3),
+                                     range: NSMakeRange(0,"\(self.currentPage+1) ".characters.count))
+        
+        attributeString.addAttribute(NSFontAttributeName,
+                                     value: UIFont.boldSystemFont(ofSize: TGPhotoPickerConfig.shared.fontSize),
+                                     range: NSMakeRange("\(self.currentPage+1) ".characters.count,1))
+        
+        attributeString.addAttribute(NSFontAttributeName,
+                                     value: UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize-3),
+                                     range: NSMakeRange("\(self.currentPage+1) / ".characters.count,"\(self.selectImages.count)".characters.count))
+        indicatorLabel.attributedText = attributeString
     }
+    
+    fileprivate lazy var indicatorLabel: UILabel = {
+        let indicatorLbl = UILabel(frame: CGRect(x: 0, y: ((self.navigationController?.navigationBar.height)! - TGPhotoPickerConfig.shared.toolBarH * 0.8) / 2, width: 0, height: TGPhotoPickerConfig.shared.toolBarH * 0.8))
+        indicatorLbl.isHidden = false
+        indicatorLbl.text = "0 / \(TGPhotoPickerConfig.shared.maxImageCount)"
+        indicatorLbl.font = UIFont.systemFont(ofSize: TGPhotoPickerConfig.shared.fontSize+1)
+        indicatorLbl.layer.cornerRadius = TGPhotoPickerConfig.shared.doneButtonH * 0.15
+        indicatorLbl.clipsToBounds = true
+        indicatorLbl.textColor = .white
+        indicatorLbl.textAlignment = .center
+        indicatorLbl.backgroundColor = TGPhotoPickerConfig.shared.indicatorColor
+        //if TGPhotoPickerConfig.shared.isShowBorder {
+        indicatorLbl.layer.borderWidth = TGPhotoPickerConfig.shared.checkboxLineW
+        indicatorLbl.layer.borderColor = UIColor.clear.cgColor
+        //}
+        indicatorLbl.sizeToFit()
+        indicatorLbl.h = TGPhotoPickerConfig.shared.toolBarH * 0.8
+        indicatorLbl.w = indicatorLbl.w < TGPhotoPickerConfig.shared.doneButtonW * 0.8 ? TGPhotoPickerConfig.shared.doneButtonW * 0.8 : indicatorLbl.w
+        return indicatorLbl
+    }()
 
 }
 
