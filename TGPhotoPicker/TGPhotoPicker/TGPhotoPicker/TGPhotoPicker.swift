@@ -114,6 +114,9 @@ extension TGPhotoPicker : UICollectionViewDataSource{
         case UIGestureRecognizerState.began:
             let point = sender.location(in: self.collectionView)
             if let indexpath = self.collectionView?.indexPathForItem(at: point),let cell = self.collectionView?.cellForItem(at: indexpath) as? TGPickerCell{
+                guard cell.photoM != nil else {
+                    return
+                }
                 cell.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
                 cell.isMaskHidden = false
                 self.collectionView?.beginInteractiveMovementForItem(at: indexpath)
@@ -164,11 +167,20 @@ extension TGPhotoPicker : UICollectionViewDataSource{
 
 extension TGPhotoPicker: TGPhotoPickerCellDelegate{
     func remove(_ model: TGPhotoM?) {
-        if model != nil{
-            self.tgphotos.remove(at: (self.tgphotos.index(of: model!))!)
+        guard let model = model,let index = self.tgphotos.index(of: model) else { return }
+        if self.tgphotos.count == TGPhotoPickerConfig.shared.maxImageCount {//删除最大张数时的最后一张或中间一张
             DispatchQueue.main.async {
-                self.collectionView?.reloadData()
+                (self.collectionView?.cellForItem(at: IndexPath(row: index, section: 0)) as! TGPickerCell).photoM = nil
+                if (index != TGPhotoPickerConfig.shared.maxImageCount - 1){//中间
+                    self.collectionView?.moveItem(at: IndexPath(row: index, section: 0), to: IndexPath(row: TGPhotoPickerConfig.shared.maxImageCount - 1, section: 0))
+                }
             }
+            self.tgphotos.remove(at: index)
+        }else {
+            DispatchQueue.main.async {
+                self.collectionView?.deleteItems(at: [IndexPath(row: index, section: 0)])
+            }
+            self.tgphotos.remove(at: index)
         }
     }
 }

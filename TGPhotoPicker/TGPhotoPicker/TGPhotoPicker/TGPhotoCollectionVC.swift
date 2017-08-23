@@ -274,8 +274,11 @@ class TGPhotoCollectionVC: UICollectionViewController {
     private func setupNavigationBar(){
         self.navigationController?.navigationBar.barStyle = .black
         self.navigationController?.navigationBar.tintColor = .white
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.size(width: 20, height: 20)
-            .corner(radius: 10)
+        
+        let WH = TGPhotoPickerConfig.shared.checkboxBarWH * 0.8
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.size(width: WH, height: WH)
+            .corner(radius: WH * 0.5)
             .color(.clear)
             .border(color: UIColor.white.withAlphaComponent(0.7))
             .border(width: TGPhotoPickerConfig.shared.isShowBorder ? TGPhotoPickerConfig.shared.checkboxLineW : 0)
@@ -284,10 +287,14 @@ class TGPhotoCollectionVC: UICollectionViewController {
                 context.setLineCap(.round)
                 UIColor.white.setStroke()
                 context.setLineWidth(TGPhotoPickerConfig.shared.checkboxLineW)
-                context.move(to: CGPoint(x: 12, y: 4))
-                context.addLine(to: CGPoint(x: 7, y: 10))
-                context.move(to: CGPoint(x: 7, y: 10))
-                context.addLine(to: CGPoint(x: 12, y: 16))
+                context.move(to: CGPoint(x: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.55 : 0.6), y: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.25: 0.2)))
+                context.addLine(to: CGPoint(x: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.4 : 0.35), y: WH * 0.5))
+                context.move(to: CGPoint(x: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.4 : 0.35), y: WH * 0.5))
+                context.addLine(to: CGPoint(x: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.55 : 0.6), y: WH * (TGPhotoPickerConfig.shared.isShowBorder ? 0.75 : 0.8)))
+//                context.move(to: CGPoint(x: 12, y: 4))
+//                context.addLine(to: CGPoint(x: 7, y: 10))
+//                context.move(to: CGPoint(x: 7, y: 10))
+//                context.addLine(to: CGPoint(x: 12, y: 16))
                 context.strokePath()
             }), style: .plain, target: self, action: #selector(back))
         

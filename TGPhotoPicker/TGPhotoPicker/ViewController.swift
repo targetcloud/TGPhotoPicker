@@ -13,9 +13,9 @@ class ViewController: UIViewController {
     //lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160))
     
     //创建方式2 带配置
-    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { (config) in
-        config.type = .weibo
-    }
+//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { (config) in
+//        config.type = .weibo
+//    }
 
     //创建方式3 带配置(链式)
 //    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { (config) in
@@ -24,12 +24,13 @@ class ViewController: UIViewController {
 //    }
 
     //创建方式4 带配置（单例配置对象）
-//    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { _ in
-//        TGPhotoPickerConfig.shared.tg_type(.wechat)
-//            .tg_checkboxLineW(1)
-//            .tg_toolBarH(50)
-//            .tg_useChineseAlbumName(true)
-//    }
+    lazy var picker: TGPhotoPicker = TGPhotoPicker(self, frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 160)) { _ in
+        TGPhotoPickerConfig.shared.tg_type(.wechat)
+            .tg_checkboxLineW(1)
+            .tg_colCount(4)
+            .tg_toolBarH(50)
+            .tg_useChineseAlbumName(true)
+    }
     
     //以下所有代码请读者忽略（以下代码为演示各参数效果而写）
     override func viewDidLoad() {
@@ -122,7 +123,7 @@ class ViewController: UIViewController {
         (self.view.viewWithTag(3000+3) as! UIButton).isSelected = true
         (self.view.viewWithTag(4000+1) as! UIButton).isSelected = true
         TGPhotoPickerConfig.shared.checkboxType = currentCheckboxType
-        TGPhotoPickerConfig.shared.checkboxPosition = TGCheckboxPosition(rawValue: 1)!
+        //TGPhotoPickerConfig.shared.checkboxPosition = TGCheckboxPosition(rawValue: 1)!
         
         self.view.addSubview(cornerLabel)
         let cornerSlider = UISlider(frame: CGRect(x: 110, y: 270, width: TGPhotoPickerConfig.ScreenW - 130, height: 20))
