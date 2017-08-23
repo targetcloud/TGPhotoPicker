@@ -17,7 +17,7 @@ No using picture resources, based on TGImage
 
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2642.PNG" width = "60%" />
 
-###### 参数调节界面
+###### 参数调节界面(只为方便直观查看本插件的参数效果，实际使用时请直接参考TGPhotoPickerConfig.swift提供的参数)
 
 <img src="https://github.com/targetcloud/TGPhotoPicker/blob/master/img/IMG_2641.PNG" width = "60%" />
 
