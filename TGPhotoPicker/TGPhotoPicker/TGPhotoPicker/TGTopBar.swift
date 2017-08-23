@@ -35,7 +35,7 @@ class TGTopBar: UIView {
     
     func setSelect(_ select:Bool,_ showOrder: Int = -1){
         if showOrder >= 0{
-            checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageArr[showOrder]
+            checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageForBarArr[showOrder]
         }
         self.checkboxSelect!.isHidden = !select
         self.checkbox!.isSelected = select
@@ -122,7 +122,7 @@ class TGTopBar: UIView {
             }
             self.delegate?.onSelectedClicked(select: true)
             if TGPhotoPickerConfig.shared.isShowNumber{
-                checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageArr[(nav?.assetArr.count)! - 1]
+                checkboxSelect?.image = TGPhotoPickerConfig.shared.cacheNumerImageForBarArr[(nav?.assetArr.count)! - 1]
             }
         }
     }

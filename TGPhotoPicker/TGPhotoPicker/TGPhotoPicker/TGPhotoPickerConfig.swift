@@ -425,6 +425,7 @@ class TGPhotoPickerConfig {
     
     /** 缓存的选择顺序图像,自动生成*/
     var cacheNumerImageArr = [UIImage]()
+    var cacheNumerImageForBarArr = [UIImage]()
     
     /** 相机在选择照片时显示*/
     var showCarmeraInSelectPhoto: Bool = false
@@ -1713,8 +1714,9 @@ class TGPhotoPickerConfig {
                 //cache
                 cacheNumerImageArr.removeAll()
                 for i in 1...maxImageCount{
-                    if let image = getDigitImage(UInt(i)){
+                    if let image = getDigitImage(UInt(i)), let barImage = getDigitImage(UInt(i),.circle,false,fontSize + 3) {
                         cacheNumerImageArr.append(image)
+                        cacheNumerImageForBarArr.append(barImage)
                     }
                 }
             //default:
