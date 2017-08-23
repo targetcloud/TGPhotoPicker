@@ -202,10 +202,10 @@ class TGBottomBar: UIView {
         indicatorLbl.textColor = .white
         indicatorLbl.textAlignment = .center
         indicatorLbl.backgroundColor = TGPhotoPickerConfig.shared.indicatorColor
-//        if TGPhotoPickerConfig.shared.isShowBorder {
-//            indicatorLbl.layer.borderWidth = TGPhotoPickerConfig.shared.checkboxLineW
-//            indicatorLbl.layer.borderColor = TGPhotoPickerConfig.shared.tinColor.cgColor
-//        }
+        //if TGPhotoPickerConfig.shared.isShowBorder {
+            indicatorLbl.layer.borderWidth = TGPhotoPickerConfig.shared.checkboxLineW
+            indicatorLbl.layer.borderColor = UIColor.clear.cgColor
+        //}
         indicatorLbl.sizeToFit()
         indicatorLbl.h = TGPhotoPickerConfig.shared.toolBarH * 0.8
         indicatorLbl.w = indicatorLbl.w < TGPhotoPickerConfig.shared.doneButtonW * 0.8 ? TGPhotoPickerConfig.shared.doneButtonW * 0.8 : indicatorLbl.w

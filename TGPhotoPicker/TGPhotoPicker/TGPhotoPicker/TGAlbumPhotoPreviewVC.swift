@@ -61,9 +61,12 @@ class TGAlbumPhotoPreviewVC: UIViewController {
         if TGPhotoPickerConfig.shared.isShowIndicator && (TGPhotoPickerConfig.shared.indicatorPosition != .inBottomBar){
             indicatorLabel = (bottomBar?.indicatorLabel)!
             switch TGPhotoPickerConfig.shared.indicatorPosition {
-            case .top,.bottom:
+            case .top:
                 self.view.addSubview(indicatorLabel!)
-                indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (TGPhotoPickerConfig.shared.indicatorPosition == .top) ? (topBar?.frame.maxY)! : (bottomBar?.y)! - (indicatorLabel?.h)!)
+                indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (topBar?.frame.maxY)! - (indicatorLabel?.h)! + 5)
+            case .bottom:
+                self.view.addSubview(indicatorLabel!)
+                indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: (bottomBar?.y)! - (indicatorLabel?.h)! - 5)
             default:
                 self.topBar?.addSubview(indicatorLabel!)
                 indicatorLabel?.origin = CGPoint(x: (TGPhotoPickerConfig.ScreenW - (bottomBar?.indicatorLabel.w)!)/2, y: ((topBar?.h)! - (indicatorLabel?.h)!)/2)
@@ -177,10 +180,10 @@ extension TGAlbumPhotoPreviewVC: TGPhotoPreviewCellDelegate{
                 originPoint.y = originPoint.y - self.bottomBar!.frame.height
                 self.bottomBar!.frame.origin = originPoint
                 if TGPhotoPickerConfig.shared.indicatorPosition == .top{
-                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)!
+                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)! + 5
                 }
                 if TGPhotoPickerConfig.shared.indicatorPosition == .bottom{
-                    self.indicatorLabel?.bottom = (self.bottomBar?.y)!
+                    self.indicatorLabel?.bottom = (self.bottomBar?.y)! - 5
                 }
             }, completion: { isFinished in
                 if isFinished {
@@ -194,10 +197,10 @@ extension TGAlbumPhotoPreviewVC: TGPhotoPreviewCellDelegate{
                 originPoint.y = originPoint.y + self.bottomBar!.frame.height
                 self.bottomBar!.frame.origin = originPoint
                 if TGPhotoPickerConfig.shared.indicatorPosition == .top{
-                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)!
+                    self.indicatorLabel?.y = (self.topBar?.frame.maxY)! + 5
                 }
                 if TGPhotoPickerConfig.shared.indicatorPosition == .bottom{
-                    self.indicatorLabel?.bottom = (self.bottomBar?.y)!
+                    self.indicatorLabel?.bottom = (self.bottomBar?.y)! - 5
                 }
             }, completion: { isFinished in
                 if isFinished {
