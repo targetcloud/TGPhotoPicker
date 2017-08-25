@@ -1108,10 +1108,10 @@ class TGPhotoPickerConfig {
     }
 
     public func getDigitImage(_ num: UInt,_ type: TGCheckboxType = TGPhotoPickerConfig.shared.checkboxType, _ isCellSize: Bool = true,_ fontSize:CGFloat = TGPhotoPickerConfig.shared.fontSize - 1) -> UIImage?{
-        var W = isCellSize ? self.checkboxCellWH : self.checkboxBarWH
-        var H = isCellSize ? self.checkboxCellWH : self.checkboxBarWH
+        var W = (isCellSize ? self.checkboxCellWH : self.checkboxBarWH) * UIScreen.main.scale
+        var H = (isCellSize ? self.checkboxCellWH : self.checkboxBarWH) * UIScreen.main.scale
         let L = self.checkboxLineW
-        let B = self.checkboxPadding
+        let B = self.checkboxPadding * UIScreen.main.scale
         let P = self.checkboxPosition
         
         let str: NSString = String(num) as NSString
@@ -1121,6 +1121,7 @@ class TGPhotoPickerConfig {
         reduceFontSize -= num > 19 ? 1.5 : 0
         reduceFontSize -= type == .triangle ? 2 : 0
         reduceFontSize -= type == .diagonalBelt ? 2 : 0
+        reduceFontSize *= UIScreen.main.scale 
         let font: UIFont = L >= 2 ? UIFont.boldSystemFont(ofSize: reduceFontSize) : UIFont.systemFont(ofSize: reduceFontSize)
         
         var attrs = [NSFontAttributeName:font,NSForegroundColorAttributeName: UIColor.white]
