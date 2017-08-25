@@ -1711,21 +1711,18 @@ class TGPhotoPickerConfig {
         if isShowNumber{
             switch checkboxType {
             case .onlyCheckbox,.circle,.square,.belt,.diagonalBelt,.triangle,.heart,.star:
-                //cache
                 cacheNumerImageArr.removeAll()
+                cacheNumerImageForBarArr.removeAll()
                 for i in 1...maxImageCount{
                     if let image = getDigitImage(UInt(i)), let barImage = getDigitImage(UInt(i),.circle,false,fontSize + 3) {
                         cacheNumerImageArr.append(image)
                         cacheNumerImageForBarArr.append(barImage)
                     }
                 }
-            //default:
-                //clear cache
-                //cacheNumerImageArr.removeAll()
             }
         }else{
-            //clear cache
             cacheNumerImageArr.removeAll()
+            cacheNumerImageForBarArr.removeAll()
         }
     }
     
